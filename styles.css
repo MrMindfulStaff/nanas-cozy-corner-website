@@ -109,9 +109,9 @@ textarea {
 
 .brand-logo {
   display: block;
-  height: clamp(41px, 4.1vw, 52px);
+  height: clamp(58px, 5.4vw, 70px);
   object-fit: contain;
-  width: clamp(109px, 10.9vw, 159px);
+  width: clamp(132px, 13vw, 190px);
 }
 
 .brand-mark {
@@ -1667,6 +1667,11 @@ textarea:focus {
 
   .brand span:last-child {
     max-width: 128px;
+  }
+
+  .brand-logo {
+    height: 56px;
+    width: 150px;
   }
 
   .header-cta {
