@@ -1482,6 +1482,32 @@ textarea:focus {
   margin-bottom: 22px;
 }
 
+.ehs-logo-panel {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 20px;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 156px 1fr;
+  margin: 0 0 22px;
+  max-width: 560px;
+  padding: 14px;
+}
+
+.ehs-logo-panel img {
+  display: block;
+  max-width: 100%;
+  width: 156px;
+}
+
+.foundation-ehs .ehs-logo-panel span {
+  color: var(--navy);
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
 .foundation-ehs-card {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -1821,6 +1847,10 @@ textarea:focus {
   .foundation-highlights,
   .foundation-ehs-card ul,
   .foundation-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .ehs-logo-panel {
     grid-template-columns: 1fr;
   }
 
