@@ -165,8 +165,7 @@ textarea {
   justify-content: center;
 }
 
-.desktop-nav a,
-.header-cta {
+.desktop-nav a {
   border-radius: 999px;
   font-size: 0.9rem;
   font-weight: 800;
@@ -197,14 +196,39 @@ textarea {
 }
 
 .desktop-nav a:hover,
+.header-login:hover,
 .header-cta:hover {
   background: rgba(0, 139, 122, 0.13);
+}
+
+.header-actions {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-self: end;
+}
+
+.header-login,
+.header-cta {
+  align-items: center;
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 0.86rem;
+  font-weight: 900;
+  justify-content: center;
+  padding: 10px 12px;
+  white-space: nowrap;
+}
+
+.header-login {
+  background: rgba(255, 255, 255, 0.78);
+  border: 2px solid rgba(0, 139, 122, 0.18);
+  color: var(--navy);
 }
 
 .header-cta {
   background: linear-gradient(135deg, var(--coral), var(--orange));
   color: #fff;
-  justify-self: end;
   box-shadow: 0 10px 24px rgba(201, 149, 78, 0.26);
 }
 
@@ -1589,7 +1613,7 @@ textarea:focus {
     grid-row: 1;
   }
 
-  .header-cta {
+  .header-actions {
     grid-column: 2;
     grid-row: 1;
   }
@@ -1681,7 +1705,7 @@ textarea:focus {
 @media (max-width: 620px) {
   .site-header {
     gap: 12px;
-    min-height: 104px;
+    min-height: 158px;
     padding: 11px 15px;
   }
 
@@ -1694,8 +1718,24 @@ textarea:focus {
     width: 157px;
   }
 
+  .header-actions {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    gap: 6px;
+    justify-self: stretch;
+  }
+
+  .header-login,
   .header-cta {
-    padding: 10px 12px;
+    flex: 1;
+    font-size: 0.74rem;
+    justify-content: center;
+    padding: 9px 10px;
+    text-align: center;
+  }
+
+  .desktop-nav {
+    grid-row: 3;
   }
 
   .hero-actions,
