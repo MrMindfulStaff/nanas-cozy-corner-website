@@ -20,16 +20,17 @@
       <section class="page-hero"><div><p class="eyebrow">Contact</p><h1>Ask a question or tell us what you need.</h1><p>Use this page for general messages about programs, enrollment, Early Head Start, tours, referrals, or next steps.</p></div></section>
       <section class="section service-layout">
         <div><h2>What can we help with?</h2><p class="lead">If you are not ready for a specific form yet, send a general message. Nana's team can help route you to enrollment, a tour, EHS pre-screening, or referral support.</p><ul class="detail-list"><li>Enrollment and program questions</li><li>Tour scheduling questions</li><li>Early Head Start questions</li><li>Referral program questions</li><li>General family support questions</li></ul></div>
-        <aside class="info-panel"><h3>Looking for a specific step?</h3><p>Enrollment, Early Head Start, tour, and referral pages each have their own dedicated form.</p><a class="button light" href="enrollment.html">Start Enrollment</a></aside>
+        <aside class="info-panel"><h3>Contact details</h3><p>4006 N 42nd Street, Milwaukee, WI 53216</p><p><a href="mailto:Info@nanascozycorner.com">Info@nanascozycorner.com</a></p><p><a href="tel:14144426262">414-442-NANA</a></p><a class="button light" href="enrollment.html">Start Enrollment</a></aside>
       </section>
       <section class="page-form-section">
         <form class="form-card full-form" data-endpoint="/api/contact" data-pipeline-status="New Inquiry">
           <h2>Contact Nana's Cozy Corner</h2>
           <input type="hidden" name="source" value="public_website_contact_page">
           <input type="hidden" name="pipeline_status" value="New Inquiry">
-          <label>Name<input name="name" autocomplete="name" required></label>
-          <label>Phone<input name="phone" type="tel" autocomplete="tel"></label>
+          <label>First name<input name="first_name" autocomplete="given-name" required></label>
+          <label>Last name<input name="last_name" autocomplete="family-name" required></label>
           <label>Email<input name="email" type="email" autocomplete="email" required></label>
+          <label>Phone<input name="phone" type="tel" autocomplete="tel"></label>
           <label>Reason for contact<select name="contact_reason" required><option value="">Select one</option><option>Enrollment question</option><option>Early Head Start question</option><option>Referral question</option><option>General message</option></select></label>
           <label class="full">Message<textarea name="message" rows="4" required></textarea></label>
           <button class="button primary" type="submit">Send Message</button>
@@ -37,7 +38,7 @@
         </form>
       </section>
     </main>
-    <footer class="site-footer"><div><strong>Nana's Cozy Corner</strong><p>Licensed childcare center serving Milwaukee families.</p></div><a href="referral-program.html">Refer a Family</a></footer>
+    <footer class="site-footer"><div><strong>Nana's Cozy Corner</strong><p>4006 N 42nd Street, Milwaukee, WI 53216 | Info@nanascozycorner.com | 414-442-NANA</p></div><a href="referral-program.html">Refer a Family</a></footer>
     <script src="script.js"></script>
   </body>
 </html>

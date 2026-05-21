@@ -24,6 +24,6 @@ forms.forEach((form) => {
     });
 
     form.reset();
-    note.textContent = "Thanks. Nana's Cozy Corner will follow up with next steps.";
+    note.textContent = "Thanks, we received your submission. One of our staff members will contact you within 2 business days.";
   });
 });

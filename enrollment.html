@@ -18,7 +18,7 @@
     </header>
     <main>
       <section class="page-hero">
-        <div><p class="eyebrow">Enrollment</p><h1>Start your child's enrollment interest.</h1><p>Tell us about your child, care needs, and ideal start date. Nana's team will follow up with next steps.</p></div>
+        <div><p class="eyebrow">Enrollment</p><h1>Request childcare services.</h1><p>Tell us how many children need care, their ages, whether transportation is needed, and what schedule works for your family.</p></div>
       </section>
       <section class="section process">
         <div class="section-heading"><p class="eyebrow">Enrollment path</p><h2>What happens after you submit interest?</h2></div>
@@ -31,24 +31,30 @@
       </section>
       <section class="page-form-section">
         <form class="form-card full-form" data-endpoint="/api/leads" data-pipeline-status="New Inquiry">
-          <h2>Enrollment Interest</h2>
+          <h2>Service Request</h2>
           <input type="hidden" name="source" value="public_website_enrollment_page">
           <input type="hidden" name="pipeline_status" value="New Inquiry">
-          <label>Parent name<input name="parent_name" autocomplete="name" required></label>
+          <label>First name<input name="first_name" autocomplete="given-name" required></label>
+          <label>Last name<input name="last_name" autocomplete="family-name" required></label>
           <label>Phone<input name="phone" type="tel" autocomplete="tel" required></label>
-          <label>Email<input name="email" type="email" autocomplete="email" required></label>
-          <label>Child name<input name="child_name" required></label>
-          <label>Child date of birth<input name="child_date_of_birth" type="date" required></label>
-          <label>Desired start date<input name="desired_start_date" type="date"></label>
-          <label>Program / age group<select name="program_age_group" required><option value="">Select one</option><option>Infant</option><option>Toddler</option><option>Preschool / Early Learners</option><option>Before / After School</option></select></label>
-          <label>Preferred contact method<select name="preferred_contact_method" required><option value="">Select one</option><option>Phone</option><option>Email</option><option>Text</option></select></label>
+          <label>Address<input name="address" autocomplete="street-address" required></label>
+          <label>Email address<input name="email" type="email" autocomplete="email" required></label>
+          <label>Number of children<input name="number_children" type="number" min="1" required></label>
+          <label>Ages of children<input name="ages_of_children" required></label>
+          <label>Do you need transportation?<select name="transportation_needed" required><option value="">Select one</option><option>Yes</option><option>No</option><option>Unsure</option></select></label>
+          <label>Type of childcare<select name="childcare_type" required><option value="">Select one</option><option>Regular Childcare</option><option>Early Head Start</option></select></label>
+          <label>Hours needed<select name="hours_needed" required><option value="">Select one</option><option>Part Time</option><option>Full-Time</option></select></label>
+          <label>Start date<input name="desired_start_date" type="date" required></label>
+          <label>Expected drop-off time<input name="expected_drop_off_time" type="time"></label>
+          <label>Expected pick-up time<input name="expected_pick_up_time" type="time"></label>
+          <label>Payment type<input name="payment_type" required></label>
           <label class="full">Message<textarea name="message" rows="4"></textarea></label>
           <button class="button primary" type="submit">Enroll Now</button>
           <p class="form-note" aria-live="polite"></p>
         </form>
       </section>
     </main>
-    <footer class="site-footer"><div><strong>Nana's Cozy Corner</strong><p>Licensed childcare center serving Milwaukee families.</p></div><a href="schedule-a-tour.html">Schedule a Tour</a></footer>
+    <footer class="site-footer"><div><strong>Nana's Cozy Corner</strong><p>4006 N 42nd Street, Milwaukee, WI 53216 | Info@nanascozycorner.com | 414-442-NANA</p></div><a href="schedule-a-tour.html">Schedule a Tour</a></footer>
     <script src="script.js"></script>
   </body>
 </html>
