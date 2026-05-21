@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Schedule a Tour | Nana's Cozy Corner</title>
+    <meta name="description" content="Request a tour of Nana's Cozy Corner, a licensed childcare center in Milwaukee.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,650;9..144,750&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=2">
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="index.html"><span class="brand-mark">N</span><span>Nana's Cozy Corner</span></a>
+      <nav class="desktop-nav" aria-label="Primary navigation"><a href="about.html">About</a><a href="programs.html">Programs</a><a href="early-head-start.html">Early Head Start</a><a href="enrollment.html">Enrollment</a><a href="schedule-a-tour.html">Tour</a><a href="referral-program.html">Referrals</a><a href="contact.html">Contact</a></nav>
+      <a class="header-cta" href="enrollment.html">Enroll Now</a>
+    </header>
+    <main>
+      <section class="page-hero"><div><p class="eyebrow">Schedule a Tour</p><h1>See the center and ask your questions in person.</h1><p>A tour helps families understand the space, routines, program fit, and enrollment next steps before making a decision.</p></div></section>
+      <section class="section service-layout">
+        <div><h2>What the tour covers</h2><p class="lead">Tour requests help Nana's team prepare for your visit. We will review your child's age, your care needs, possible start timing, and any Early Head Start questions.</p><ul class="detail-list"><li>Classroom environment and daily routines</li><li>Age group fit and program availability</li><li>Parent communication expectations</li><li>Enrollment documents and next steps</li><li>Early Head Start questions if applicable</li></ul></div>
+        <aside class="info-panel"><h3>Before you arrive</h3><p>Bring any questions about schedule, care needs, eligibility, and start dates. The goal is to make the next step feel clear.</p></aside>
+      </section>
+      <section class="page-form-section">
+        <form class="form-card full-form" data-endpoint="/api/tour-requests" data-pipeline-status="Tour Scheduled">
+          <h2>Tour Request</h2>
+          <input type="hidden" name="source" value="public_website_tour_page">
+          <input type="hidden" name="pipeline_status" value="Tour Scheduled">
+          <label>Parent name<input name="parent_name" autocomplete="name" required></label>
+          <label>Phone<input name="phone" type="tel" autocomplete="tel" required></label>
+          <label>Email<input name="email" type="email" autocomplete="email"></label>
+          <label>Preferred tour date<input name="preferred_tour_date" type="date" required></label>
+          <label>Preferred time<input name="preferred_time" type="time" required></label>
+          <label>Child age<input name="child_age" required></label>
+          <label class="full">Notes<textarea name="notes" rows="4"></textarea></label>
+          <button class="button primary" type="submit">Schedule a Tour</button>
+          <p class="form-note" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+    <footer class="site-footer"><div><strong>Nana's Cozy Corner</strong><p>Licensed childcare center serving Milwaukee families.</p></div><a href="enrollment.html">Enroll Now</a></footer>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Early Head Start Eligibility | Nana's Cozy Corner</title>
+    <meta name="description" content="Check Early Head Start eligibility indicators and submit a pre-screen for Nana's Cozy Corner in Milwaukee.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,650;9..144,750&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=2">
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="index.html"><span class="brand-mark">N</span><span>Nana's Cozy Corner</span></a>
+      <nav class="desktop-nav" aria-label="Primary navigation"><a href="about.html">About</a><a href="programs.html">Programs</a><a href="early-head-start.html">Early Head Start</a><a href="enrollment.html">Enrollment</a><a href="schedule-a-tour.html">Tour</a><a href="referral-program.html">Referrals</a><a href="contact.html">Contact</a></nav>
+      <a class="header-cta" href="enrollment.html">Enroll Now</a>
+    </header>
+    <main>
+      <section class="page-hero ehs-page-hero">
+        <div>
+          <p class="eyebrow">Early Head Start</p>
+          <h1>No-cost support may be available for eligible families.</h1>
+          <p>Early Head Start supports eligible families with children ages 0-3 and expectant families. This page helps you understand common indicators before submitting a pre-screen.</p>
+        </div>
+      </section>
+      <section class="section service-layout">
+        <div>
+          <h2>Who can apply?</h2>
+          <p class="lead">Families with infants, toddlers, children ages 0-3, and expectant families may qualify based on income or other priority indicators. The pre-screen does not guarantee eligibility, but it helps Nana's Cozy Corner understand your situation and guide your next step.</p>
+          <ul class="detail-list">
+            <li>Income eligibility interest or uncertainty</li>
+            <li>SNAP, TANF, SSI, foster, or kinship status</li>
+            <li>Housing instability or temporary housing</li>
+            <li>Expectant family support needs</li>
+            <li>Health, dental, vision, hearing, developmental, and family engagement support needs</li>
+          </ul>
+        </div>
+        <aside class="info-panel">
+          <h3>Supportive, not bureaucratic.</h3>
+          <p>The goal is to make the process feel clear and human. Share what you know, choose “unsure” when needed, and Nana's team can follow up.</p>
+          <a class="button light" href="#ehs-form">Start Pre-Screen</a>
+        </aside>
+      </section>
+      <section class="page-form-section" id="ehs-form">
+        <form class="form-card full-form" data-endpoint="/api/ehs-screenings" data-pipeline-status="EHS Review">
+          <h2>EHS Pre-Screen</h2>
+          <input type="hidden" name="source" value="public_website_ehs_page">
+          <input type="hidden" name="pipeline_status" value="EHS Review">
+          <label>Parent name<input name="parent_name" autocomplete="name" required></label>
+          <label>Phone<input name="phone" type="tel" autocomplete="tel" required></label>
+          <label>Email<input name="email" type="email" autocomplete="email"></label>
+          <label>Child age or expected due date<input name="child_age_or_expected_due_date" required></label>
+          <label>ZIP code<input name="zip_code" inputmode="numeric" required></label>
+          <label>SNAP / TANF / SSI status<select name="snap_tanf_ssi_status" required><option value="">Select one</option><option>Yes</option><option>No</option><option>Unsure</option></select></label>
+          <label>Foster / kinship status<select name="foster_kinship_status" required><option value="">Select one</option><option>Yes</option><option>No</option><option>Unsure</option></select></label>
+          <label>Housing status<select name="housing_status" required><option value="">Select one</option><option>Stable housing</option><option>Temporary housing</option><option>Experiencing housing instability</option><option>Prefer to discuss</option></select></label>
+          <label>Income eligibility interest<select name="income_eligibility_interest" required><option value="">Select one</option><option>Yes, please review</option><option>Maybe / unsure</option><option>No</option></select></label>
+          <label>Preferred contact method<select name="preferred_contact_method" required><option value="">Select one</option><option>Phone</option><option>Email</option><option>Text</option></select></label>
+          <button class="button primary" type="submit">Check Eligibility</button>
+          <p class="form-note" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+    <footer class="site-footer"><div><strong>Nana's Cozy Corner</strong><p>Licensed childcare center serving Milwaukee families.</p></div><a href="contact.html">Contact Us</a></footer>
+    <script src="script.js"></script>
+  </body>
+</html>

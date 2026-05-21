@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cozy Circle Referral Program | Nana's Cozy Corner</title>
+    <meta name="description" content="Refer a family to Nana's Cozy Corner through the Cozy Circle Referral Program.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,650;9..144,750&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=2">
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="index.html"><span class="brand-mark">N</span><span>Nana's Cozy Corner</span></a>
+      <nav class="desktop-nav" aria-label="Primary navigation"><a href="about.html">About</a><a href="programs.html">Programs</a><a href="early-head-start.html">Early Head Start</a><a href="enrollment.html">Enrollment</a><a href="schedule-a-tour.html">Tour</a><a href="referral-program.html">Referrals</a><a href="contact.html">Contact</a></nav>
+      <a class="header-cta" href="enrollment.html">Enroll Now</a>
+    </header>
+    <main>
+      <section class="page-hero referral-page-hero"><div><p class="eyebrow">Cozy Circle Referral Program</p><h1>You earn when they stay.</h1><p>Current parents, staff members, and approved community partners can refer families to Nana's Cozy Corner.</p></div></section>
+      <section class="section split referral-section">
+        <div><h2>$750 referral bonus</h2><p class="lead">Qualified referrals may earn a $750 bonus after 60 consecutive days of enrollment. Early Head Start eligible referrals may qualify for a bonus boost after eligibility confirmation.</p><div class="referral-callout"><strong>Who can refer?</strong><p>Current parents, staff members, and approved community partners.</p></div></div>
+        <div class="referral-rules"><h3>How it works</h3><ol><li>Refer a family using the form below.</li><li>We contact the referred family and review care needs.</li><li>If they enroll and stay 60 consecutive days, the bonus is reviewed.</li></ol></div>
+      </section>
+      <section class="page-form-section">
+        <form class="form-card full-form" data-endpoint="/api/referrals" data-pipeline-status="New Inquiry">
+          <h2>Referral Form</h2>
+          <input type="hidden" name="source" value="public_website_referral_page">
+          <input type="hidden" name="pipeline_status" value="New Inquiry">
+          <label>Referrer name<input name="referrer_name" required></label>
+          <label>Referrer type<select name="referrer_type" required><option value="">Select one</option><option>Parent</option><option>Family member</option><option>Community partner</option><option>Staff</option></select></label>
+          <label>Referrer phone / email<input name="referrer_phone_email" required></label>
+          <label>Referred parent name<input name="referred_parent_name" required></label>
+          <label>Referred parent phone / email<input name="referred_parent_phone_email" required></label>
+          <label>Child age<input name="child_age"></label>
+          <label>EHS eligible maybe / yes / no<select name="ehs_eligible_maybe_yes_no"><option value="">Select one</option><option>Maybe</option><option>Yes</option><option>No</option><option>Unsure</option></select></label>
+          <label class="full">Notes<textarea name="notes" rows="4"></textarea></label>
+          <button class="button primary" type="submit">Refer a Family</button>
+          <p class="form-note" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+    <footer class="site-footer"><div><strong>Nana's Cozy Corner</strong><p>Licensed childcare center serving Milwaukee families.</p></div><a href="contact.html">Contact Us</a></footer>
+    <script src="script.js"></script>
+  </body>
+</html>

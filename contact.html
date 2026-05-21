@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact | Nana's Cozy Corner</title>
+    <meta name="description" content="Contact Nana's Cozy Corner with childcare, enrollment, Early Head Start, tour, or referral questions.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,650;9..144,750&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=2">
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="index.html"><span class="brand-mark">N</span><span>Nana's Cozy Corner</span></a>
+      <nav class="desktop-nav" aria-label="Primary navigation"><a href="about.html">About</a><a href="programs.html">Programs</a><a href="early-head-start.html">Early Head Start</a><a href="enrollment.html">Enrollment</a><a href="schedule-a-tour.html">Tour</a><a href="referral-program.html">Referrals</a><a href="contact.html">Contact</a></nav>
+      <a class="header-cta" href="enrollment.html">Enroll Now</a>
+    </header>
+    <main>
+      <section class="page-hero"><div><p class="eyebrow">Contact</p><h1>Ask a question or tell us what you need.</h1><p>Use this page for general messages about programs, enrollment, Early Head Start, tours, referrals, or next steps.</p></div></section>
+      <section class="section service-layout">
+        <div><h2>What can we help with?</h2><p class="lead">If you are not ready for a specific form yet, send a general message. Nana's team can help route you to enrollment, a tour, EHS pre-screening, or referral support.</p><ul class="detail-list"><li>Enrollment and program questions</li><li>Tour scheduling questions</li><li>Early Head Start questions</li><li>Referral program questions</li><li>General family support questions</li></ul></div>
+        <aside class="info-panel"><h3>Looking for a specific step?</h3><p>Enrollment, Early Head Start, tour, and referral pages each have their own dedicated form.</p><a class="button light" href="enrollment.html">Start Enrollment</a></aside>
+      </section>
+      <section class="page-form-section">
+        <form class="form-card full-form" data-endpoint="/api/contact" data-pipeline-status="New Inquiry">
+          <h2>Contact Nana's Cozy Corner</h2>
+          <input type="hidden" name="source" value="public_website_contact_page">
+          <input type="hidden" name="pipeline_status" value="New Inquiry">
+          <label>Name<input name="name" autocomplete="name" required></label>
+          <label>Phone<input name="phone" type="tel" autocomplete="tel"></label>
+          <label>Email<input name="email" type="email" autocomplete="email" required></label>
+          <label>Reason for contact<select name="contact_reason" required><option value="">Select one</option><option>Enrollment question</option><option>Early Head Start question</option><option>Referral question</option><option>General message</option></select></label>
+          <label class="full">Message<textarea name="message" rows="4" required></textarea></label>
+          <button class="button primary" type="submit">Send Message</button>
+          <p class="form-note" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+    <footer class="site-footer"><div><strong>Nana's Cozy Corner</strong><p>Licensed childcare center serving Milwaukee families.</p></div><a href="referral-program.html">Refer a Family</a></footer>
+    <script src="script.js"></script>
+  </body>
+</html>
