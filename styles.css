@@ -95,6 +95,26 @@ textarea {
   z-index: 20;
 }
 
+.site-header::after {
+  background: linear-gradient(90deg, #fff8ed, #e9f8f2);
+  border: 1px solid rgba(0, 139, 122, 0.2);
+  border-radius: 999px;
+  bottom: -15px;
+  box-shadow: 0 8px 18px rgba(8, 43, 95, 0.08);
+  color: var(--teal);
+  content: "LEARN • GROW • BELONG";
+  font-size: 0.72rem;
+  font-weight: 900;
+  left: 50%;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  padding: 8px 16px;
+  position: absolute;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
 .site-header.is-scrolled {
   background: rgba(255, 247, 232, 0.98);
   box-shadow: 0 10px 30px rgba(60, 42, 34, 0.1);
