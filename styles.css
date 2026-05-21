@@ -1175,7 +1175,7 @@ textarea:focus {
 .foundation-hero {
   background:
     linear-gradient(90deg, rgba(255, 248, 237, 0.98) 0%, rgba(255, 248, 237, 0.94) 34%, rgba(255, 248, 237, 0.62) 52%, rgba(255, 248, 237, 0.08) 76%, rgba(255, 248, 237, 0) 100%),
-    url("assets/hero-classroom.png") right center / auto 92% no-repeat;
+    url("assets/hero-classroom.png") right center / auto 78% no-repeat;
   overflow: hidden;
   padding: clamp(170px, 16vw, 210px) 0 clamp(70px, 8vw, 96px);
   position: relative;
