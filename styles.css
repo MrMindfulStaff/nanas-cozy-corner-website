@@ -109,9 +109,9 @@ textarea {
 
 .brand-logo {
   display: block;
-  height: clamp(56px, 5.6vw, 72px);
+  height: clamp(48px, 4.8vw, 61px);
   object-fit: contain;
-  width: clamp(150px, 15vw, 220px);
+  width: clamp(128px, 12.8vw, 187px);
 }
 
 .brand-mark {
