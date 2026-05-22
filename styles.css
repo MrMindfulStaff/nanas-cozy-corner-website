@@ -1568,34 +1568,109 @@ textarea:focus {
 }
 
 .foundation-referral {
-  background: linear-gradient(135deg, #fff, #f6fbff);
+  background:
+    radial-gradient(circle at 8% 12%, rgba(255, 193, 7, 0.22), transparent 25%),
+    radial-gradient(circle at 90% 14%, rgba(242, 95, 76, 0.18), transparent 24%),
+    radial-gradient(circle at 50% 85%, rgba(15, 143, 131, 0.14), transparent 34%),
+    linear-gradient(135deg, #fff8ed 0%, #fffdf8 48%, #ecfbf7 100%);
+  overflow: hidden;
+  position: relative;
 }
 
-.foundation-referral-grid {
+.referral-hero-card {
   align-items: center;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(8, 43, 95, 0.08);
+  border-radius: 34px;
+  box-shadow: 0 20px 46px rgba(8, 43, 95, 0.1);
   display: grid;
-  gap: 30px;
-  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 5vw, 48px);
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+  margin-bottom: 28px;
+  overflow: hidden;
+  padding: clamp(24px, 4vw, 42px);
+}
+
+.referral-logo {
+  margin-bottom: 14px;
+  width: 210px;
+}
+
+.referral-copy h2 {
+  color: var(--navy);
+  font-size: clamp(3rem, 7vw, 5.8rem);
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+  margin: 16px 0;
+}
+
+.referral-copy h2 span {
+  color: var(--coral);
+  display: block;
+}
+
+.referral-copy p {
+  color: var(--text);
+  font-size: 1.2rem;
+  max-width: 580px;
+}
+
+.referral-ribbon {
+  background: var(--teal);
+  color: #fff;
+  display: inline-flex;
+  font-size: clamp(1.05rem, 2vw, 1.45rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  margin-top: 22px;
+  padding: 12px 26px;
+  text-transform: uppercase;
+}
+
+.referral-photo {
+  align-self: stretch;
+  background:
+    linear-gradient(180deg, rgba(8, 43, 95, 0), rgba(8, 43, 95, 0.08)),
+    url("assets/hero-classroom.png") center / cover;
+  border-bottom-left-radius: 46% 22%;
+  border-top-left-radius: 46% 22%;
+  min-height: 390px;
+}
+
+.referral-layout {
+  align-items: start;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.75fr);
+}
+
+.referral-main,
+.referral-side {
+  display: grid;
+  gap: 22px;
 }
 
 .foundation-reward {
-  background: #fff;
-  border: 3px dashed rgba(242, 95, 76, 0.34);
-  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 2px solid rgba(244, 185, 66, 0.7);
+  border-radius: 24px;
   box-shadow: var(--shadow);
-  padding: 34px;
+  padding: clamp(22px, 4vw, 34px);
   text-align: center;
 }
 
 .foundation-reward h3 {
-  color: var(--teal);
-  font-size: 1.4rem;
+  background: var(--teal);
+  color: #fff;
+  display: inline-flex;
+  font-size: 1.2rem;
   letter-spacing: 0.06em;
   margin-bottom: 8px;
+  padding: 8px 28px;
   text-transform: uppercase;
 }
 
-.foundation-reward div {
+.foundation-reward .reward-amount {
   color: var(--navy);
   font-size: clamp(3rem, 7vw, 6rem);
   font-weight: 900;
@@ -1608,15 +1683,107 @@ textarea:focus {
   margin: 8px 0 22px;
 }
 
+.reward-breakdown {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 22px 0 16px;
+}
+
+.reward-breakdown article {
+  border-right: 1px dashed rgba(8, 43, 95, 0.2);
+  padding: 0 16px;
+}
+
+.reward-breakdown article:last-child {
+  border-right: 0;
+}
+
+.reward-breakdown span {
+  background: var(--teal);
+  color: #fff;
+  display: inline-flex;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+  padding: 7px 13px;
+  text-transform: uppercase;
+}
+
+.reward-breakdown article:nth-child(2) span {
+  background: #6f49ad;
+}
+
+.reward-breakdown strong {
+  color: var(--teal);
+  display: block;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1;
+}
+
+.reward-breakdown article:nth-child(2) strong {
+  color: #6f49ad;
+}
+
+.reward-breakdown p {
+  margin: 8px 0 0;
+}
+
+.reward-total {
+  background: var(--gold);
+  color: var(--navy);
+  display: block;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  margin: 16px 0 8px;
+  padding: 12px 18px;
+  text-transform: uppercase;
+}
+
+.foundation-reward small {
+  color: var(--text);
+  display: block;
+  font-size: 0.82rem;
+  text-align: left;
+}
+
+.referral-steps-panel,
+.why-refer-card,
+.eligibility-card {
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(8, 43, 95, 0.08);
+  border-radius: 24px;
+  box-shadow: 0 10px 28px rgba(8, 43, 95, 0.08);
+  padding: clamp(22px, 3vw, 30px);
+}
+
+.referral-steps-panel h3,
+.why-refer-card h3,
+.eligibility-card h3,
+.eligibility-card h4 {
+  color: var(--navy);
+  font-size: 1.45rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 16px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.why-refer-card h3 {
+  color: var(--teal);
+}
+
 .foundation-steps {
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(4, 1fr);
-  margin-top: 30px;
 }
 
 .foundation-steps article {
   background: #fff;
+  border: 1px solid rgba(8, 43, 95, 0.06);
   border-radius: 22px;
   box-shadow: 0 8px 24px rgba(8, 43, 95, 0.08);
   padding: 20px;
@@ -1634,6 +1801,129 @@ textarea:focus {
   justify-content: center;
   margin-bottom: 10px;
   width: 44px;
+}
+
+.foundation-steps article:nth-child(2) span,
+.why-refer-card article:nth-of-type(2) span {
+  background: var(--teal);
+}
+
+.foundation-steps article:nth-child(3) span {
+  background: #8a5ec7;
+}
+
+.foundation-steps article:nth-child(4) span,
+.why-refer-card article:nth-of-type(3) span {
+  background: var(--gold);
+}
+
+.why-refer-card article {
+  align-items: center;
+  border-bottom: 1px dashed rgba(8, 43, 95, 0.18);
+  display: grid;
+  gap: 14px;
+  grid-template-columns: auto 1fr;
+  padding: 16px 0;
+}
+
+.why-refer-card article:last-child {
+  border-bottom: 0;
+}
+
+.why-refer-card span {
+  align-items: center;
+  background: var(--coral);
+  border-radius: 999px;
+  color: #fff;
+  display: inline-grid;
+  font-size: 1.35rem;
+  font-weight: 900;
+  height: 54px;
+  justify-content: center;
+  width: 54px;
+}
+
+.why-refer-card strong {
+  color: var(--coral);
+  display: block;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.why-refer-card article:nth-of-type(2) strong {
+  color: var(--teal);
+}
+
+.why-refer-card article:nth-of-type(3) strong {
+  color: #f39b11;
+}
+
+.why-refer-card p,
+.eligibility-card li {
+  color: var(--text);
+}
+
+.eligibility-card ul {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  margin: 0 0 20px;
+}
+
+.eligibility-card li {
+  padding-left: 28px;
+  position: relative;
+}
+
+.eligibility-card li::before {
+  align-items: center;
+  background: var(--teal);
+  border-radius: 999px;
+  color: #fff;
+  content: "✓";
+  display: inline-grid;
+  font-size: 0.75rem;
+  font-weight: 900;
+  height: 18px;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 4px;
+  width: 18px;
+}
+
+.eligibility-card h4 {
+  color: #6f49ad;
+  font-size: 1.05rem;
+  margin-top: 8px;
+}
+
+.eligibility-card h4 + ul li::before {
+  background: #8a5ec7;
+  content: "♥";
+}
+
+.referral-contact-strip {
+  background: linear-gradient(90deg, var(--coral), var(--teal));
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 24px;
+  overflow: hidden;
+}
+
+.referral-contact-strip a {
+  color: #fff;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 900;
+  padding: 20px;
+  text-align: center;
+}
+
+.referral-contact-strip a:nth-child(2) {
+  background: rgba(8, 43, 95, 0.18);
 }
 
 .foundation-support-card span {
@@ -1714,7 +2004,8 @@ textarea:focus {
   .moment-grid,
   .steps,
   .trust-strip,
-  .pathway-grid {
+  .pathway-grid,
+  .referral-layout {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -1766,8 +2057,18 @@ textarea:focus {
 
   .foundation-hero-grid,
   .foundation-ehs-grid,
-  .foundation-referral-grid,
+  .referral-hero-card,
+  .referral-layout,
   .foundation-cta-card {
+    grid-template-columns: 1fr;
+  }
+
+  .referral-photo {
+    border-radius: 28px;
+    min-height: 320px;
+  }
+
+  .referral-contact-strip {
     grid-template-columns: 1fr;
   }
 
@@ -1881,6 +2182,29 @@ textarea:focus {
   .foundation-ehs-card ul,
   .foundation-steps {
     grid-template-columns: 1fr;
+  }
+
+  .referral-copy h2 {
+    font-size: clamp(2.7rem, 15vw, 4.4rem);
+  }
+
+  .referral-logo {
+    width: 170px;
+  }
+
+  .reward-breakdown {
+    grid-template-columns: 1fr;
+  }
+
+  .reward-breakdown article {
+    border-bottom: 1px dashed rgba(8, 43, 95, 0.2);
+    border-right: 0;
+    padding: 0 0 16px;
+  }
+
+  .reward-breakdown article:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
   }
 
   .ehs-logo-badge img {
