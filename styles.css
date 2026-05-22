@@ -1585,7 +1585,7 @@ textarea:focus {
   box-shadow: 0 20px 46px rgba(8, 43, 95, 0.1);
   display: grid;
   gap: clamp(24px, 5vw, 48px);
-  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.92fr);
   margin-bottom: 28px;
   overflow: hidden;
   padding: clamp(24px, 4vw, 42px);
@@ -1598,9 +1598,9 @@ textarea:focus {
 
 .referral-copy h2 {
   color: var(--navy);
-  font-size: clamp(3rem, 7vw, 5.8rem);
-  letter-spacing: -0.055em;
-  line-height: 0.95;
+  font-size: clamp(2.25rem, 4.5vw, 4.05rem);
+  letter-spacing: -0.035em;
+  line-height: 1;
   margin: 16px 0;
 }
 
@@ -1631,10 +1631,10 @@ textarea:focus {
   align-self: stretch;
   background:
     linear-gradient(180deg, rgba(8, 43, 95, 0), rgba(8, 43, 95, 0.08)),
-    url("assets/hero-classroom.png") center / cover;
+    url("assets/referral-community.png") center / cover;
   border-bottom-left-radius: 46% 22%;
   border-top-left-radius: 46% 22%;
-  min-height: 390px;
+  min-height: 300px;
 }
 
 .referral-layout {
@@ -1672,7 +1672,7 @@ textarea:focus {
 
 .foundation-reward .reward-amount {
   color: var(--navy);
-  font-size: clamp(3rem, 7vw, 6rem);
+  font-size: clamp(2.9rem, 6vw, 5rem);
   font-weight: 900;
   letter-spacing: -0.07em;
   line-height: 1;
@@ -1718,7 +1718,7 @@ textarea:focus {
 .reward-breakdown strong {
   color: var(--teal);
   display: block;
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(1.8rem, 3.4vw, 3rem);
   line-height: 1;
 }
 
@@ -2065,7 +2065,7 @@ textarea:focus {
 
   .referral-photo {
     border-radius: 28px;
-    min-height: 320px;
+    min-height: 260px;
   }
 
   .referral-contact-strip {
@@ -2185,7 +2185,7 @@ textarea:focus {
   }
 
   .referral-copy h2 {
-    font-size: clamp(2.7rem, 15vw, 4.4rem);
+    font-size: clamp(2.35rem, 12vw, 3.6rem);
   }
 
   .referral-logo {
