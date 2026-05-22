@@ -785,6 +785,36 @@ h3 {
   margin-top: 24px;
 }
 
+.ehs-qualify-image {
+  border: 10px solid rgba(255, 253, 248, 0.9);
+  border-radius: 24px;
+  box-shadow: 0 14px 34px rgba(8, 43, 95, 0.1);
+  grid-column: 1 / -1;
+  overflow: hidden;
+  position: relative;
+}
+
+.ehs-qualify-image img {
+  aspect-ratio: 18 / 7;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.ehs-qualify-image span {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 999px;
+  bottom: 14px;
+  color: var(--navy);
+  font-size: 0.9rem;
+  font-weight: 900;
+  left: 14px;
+  padding: 9px 13px;
+  position: absolute;
+  right: 14px;
+  text-align: center;
+}
+
 .qualify-card-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
