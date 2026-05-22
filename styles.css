@@ -545,6 +545,81 @@ h3 {
   max-width: 760px;
 }
 
+.programs-hero {
+  align-items: center;
+  background:
+    radial-gradient(circle at 10% 22%, rgba(255, 202, 40, 0.22), transparent 28%),
+    radial-gradient(circle at 88% 18%, rgba(0, 139, 122, 0.17), transparent 26%),
+    linear-gradient(135deg, #fffaf0 0%, #fff0cb 48%, #e9fff8 100%);
+  display: grid;
+  gap: clamp(28px, 5vw, 56px);
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+  padding: clamp(122px, 12vw, 146px) clamp(20px, 5vw, 72px) clamp(28px, 4vw, 44px);
+}
+
+.programs-hero h1 {
+  color: var(--cocoa);
+  font-size: clamp(3rem, 5.2vw, 4.8rem);
+  line-height: 0.98;
+  margin-top: 14px;
+  max-width: 640px;
+}
+
+.programs-hero p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: clamp(1.05rem, 1.8vw, 1.24rem);
+  margin: 18px 0 0;
+  max-width: 620px;
+}
+
+.programs-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.programs-hero-photo {
+  border: 12px solid rgba(255, 253, 248, 0.92);
+  border-radius: 38px;
+  box-shadow: var(--shadow);
+  min-height: 388px;
+  overflow: hidden;
+  position: relative;
+}
+
+.programs-hero-photo img {
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  position: absolute;
+  width: 100%;
+}
+
+.programs-photo-note {
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 24px;
+  bottom: 18px;
+  box-shadow: 0 12px 34px rgba(8, 43, 95, 0.18);
+  display: grid;
+  gap: 4px;
+  left: 18px;
+  max-width: 430px;
+  padding: 18px 20px;
+  position: absolute;
+  right: 18px;
+}
+
+.programs-photo-note strong {
+  color: var(--navy);
+  line-height: 1.18;
+}
+
+.programs-photo-note span {
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
 .ehs-page-hero {
   background:
     linear-gradient(120deg, rgba(65, 93, 70, 0.92), rgba(169, 95, 69, 0.78)),
@@ -820,7 +895,28 @@ blockquote,
 }
 
 .detail-programs .card {
-  min-height: 310px;
+  min-height: 250px;
+}
+
+.programs-page .section {
+  padding-bottom: clamp(44px, 6vw, 74px);
+  padding-top: clamp(42px, 6vw, 70px);
+}
+
+.programs-page .program-grid,
+.programs-page .moment-grid,
+.programs-page .steps {
+  margin-top: 18px;
+}
+
+.programs-page .card,
+.programs-page .moment-grid article,
+.programs-page .steps article {
+  padding: 21px;
+}
+
+.programs-page .section-heading {
+  max-width: 760px;
 }
 
 #programs {
@@ -2148,8 +2244,17 @@ textarea:focus {
   .foundation-ehs-grid,
   .referral-hero-card,
   .referral-layout,
-  .schedule-hero-grid {
+  .schedule-hero-grid,
+  .programs-hero {
     grid-template-columns: 1fr;
+  }
+
+  .programs-hero {
+    padding-top: 142px;
+  }
+
+  .programs-hero-photo {
+    min-height: 360px;
   }
 
   .referral-photo {
@@ -2227,7 +2332,8 @@ textarea:focus {
 
   .hero-actions,
   .final-actions,
-  .program-actions {
+  .program-actions,
+  .programs-hero-actions {
     align-items: stretch;
     flex-direction: column;
   }
@@ -2270,6 +2376,22 @@ textarea:focus {
 
   .foundation-hero {
     padding-top: 42px;
+  }
+
+  .programs-hero {
+    gap: 22px;
+    padding: 176px 18px 34px;
+  }
+
+  .programs-hero-photo {
+    border-width: 8px;
+    border-radius: 28px;
+    min-height: 300px;
+  }
+
+  .programs-photo-note {
+    border-radius: 18px;
+    padding: 14px;
   }
 
   .foundation-section,
