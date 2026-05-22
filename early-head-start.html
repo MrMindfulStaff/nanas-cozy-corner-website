@@ -8,48 +8,112 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,650;9..144,750&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=8">
+    <link rel="stylesheet" href="styles.css?v=10">
   </head>
-  <body>
+  <body class="ehs-page">
     <header class="site-header" data-header>
       <a class="brand" href="index.html"><img class="brand-logo" src="assets/nanas-logo.png" alt="Nana's Cozy Corner - Learn, Grow, Belong"></a>
       <nav class="desktop-nav" aria-label="Primary navigation"><a href="about.html">About</a><a href="programs.html">Programs</a><a href="early-head-start.html">Early Head Start</a><a href="enrollment.html">Enrollment</a><a href="schedule-a-tour.html">Tour</a><a href="referral-program.html">Referrals</a><a href="contact.html">Contact</a></nav>
       <div class="header-actions"><a class="header-login" href="https://elv.earlylearningventures.org/elv/login" target="_blank" rel="noopener">Existing Family Login</a><a class="header-cta" href="enrollment.html">Enroll Now</a></div>
     </header>
     <main>
-      <section class="page-hero ehs-page-hero">
-        <div>
+      <section class="ehs-hero">
+        <div class="ehs-hero-copy">
           <p class="eyebrow">Early Head Start</p>
-          <h1>Give your child a strong start in life.</h1>
-          <p>Early Head Start is a no-cost, federally funded program that helps infants, toddlers, and expectant families build the foundation for lifelong learning and success.</p>
+          <h1>No-cost support for little learners.</h1>
+          <p>Early Head Start helps eligible expectant families, infants, and toddlers access nurturing care, developmental support, meals, and family partnership.</p>
+          <div class="ehs-hero-actions">
+            <button class="button primary" type="button" data-modal-open="ehs-prescreen-modal">Start Pre-Screen</button>
+            <a class="button light" href="schedule-a-tour.html">Schedule a Tour</a>
+          </div>
+        </div>
+        <div class="ehs-hero-photo">
+          <img src="assets/ehs-family-support.png" alt="A childcare educator talking with an expectant parent while a toddler plays nearby">
+          <div class="ehs-photo-note">
+            <img src="assets/wisconsin-headstart-logo.jpg" alt="Wisconsin Head Start Association logo">
+            <div>
+              <strong>Supporting children ages 0-3 and expectant families</strong>
+              <span>Eligibility review, family partnership, and care that meets children early.</span>
+            </div>
+          </div>
         </div>
       </section>
-      <section class="section service-layout">
-        <div>
+
+      <section class="section ehs-overview">
+        <div class="section-heading">
+          <p class="eyebrow">How EHS Helps</p>
           <h2>What is Early Head Start?</h2>
-          <p class="lead">Early Head Start is designed to nurture children during their most important years. It is the only federal program specifically focused on children from birth to age 3 and expectant families.</p>
-          <p>Research shows that 90% of a child's brain develops before age 5, and the most critical period is from birth to age 3. EHS provides comprehensive support to help your child reach important developmental milestones while strengthening your entire family.</p>
-          <p>Services are delivered through quality childcare at centers like Nana's Cozy Corner, where your child receives nurturing care in a safe, home-like environment.</p>
-          <h2>Who qualifies?</h2>
-          <ul class="detail-list">
-            <li>Families with children from birth to age 3, up to age 2.5 at enrollment, who meet income guidelines</li>
-            <li>Pregnant women who want support during pregnancy and after birth</li>
-            <li>Families receiving SSI, TANF, or SNAP, who may automatically qualify regardless of income</li>
-            <li>Children in foster care or families experiencing homelessness</li>
-            <li>Families earning at or below Federal Poverty Level guidelines</li>
-            <li>Children with disabilities or developmental delays</li>
-          </ul>
+          <p>Early Head Start is a federally funded program for eligible families during pregnancy and the first three years of a child's life. At Nana's Cozy Corner, EHS support pairs high-quality childcare with family partnership and developmental care.</p>
         </div>
-        <aside class="info-panel">
-          <h3>Service area zip codes</h3>
-          <p>Early Head Start services through Nana's Cozy Corner are available to families in these Milwaukee zip codes: 53205, 53209, 53210, 53212, and 53216.</p>
-          <p>For EHS eligibility questions, contact WECA at <a href="tel:16087291072">608-729-1072</a> or <a href="mailto:CClark@wisconsinearlychildhood.org">CClark@wisconsinearlychildhood.org</a>.</p>
-          <a class="button light" href="#ehs-form">Start Pre-Screen</a>
-        </aside>
+
+        <div class="ehs-info-grid">
+          <article>
+            <span>1</span>
+            <h3>Early learning and care</h3>
+            <p>Children receive nurturing daily routines, play-based learning, healthy meals, and a safe classroom environment.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>Health and development</h3>
+            <p>Families may receive support with screenings, milestones, referrals, and services that help children grow with confidence.</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>Family partnership</h3>
+            <p>EHS works with parents and caregivers on goals, communication, family stability, and next steps for school readiness.</p>
+          </article>
+        </div>
       </section>
-      <section class="page-form-section" id="ehs-form">
-        <form class="form-card full-form" data-endpoint="/api/ehs-screenings" data-pipeline-status="EHS Review">
-          <h2>EHS Pre-Screen</h2>
+
+      <section class="section ehs-qualify">
+        <div>
+          <p class="eyebrow">Who May Qualify</p>
+          <h2>EHS is designed for families who could use extra support early.</h2>
+          <p class="lead">Eligibility is reviewed through program guidelines, family circumstances, and available openings. A pre-screen helps Nana's team understand your situation before next steps are confirmed.</p>
+          <button class="button primary" type="button" data-modal-open="ehs-prescreen-modal">Start Pre-Screen</button>
+        </div>
+        <div class="qualify-card-grid">
+          <article><strong>Age or pregnancy</strong><p>Expectant families and children from birth to age 3 may be eligible.</p></article>
+          <article><strong>Income or benefits</strong><p>Families receiving SNAP, TANF, or SSI may qualify, and income guidelines may apply.</p></article>
+          <article><strong>Housing or foster care</strong><p>Families experiencing housing instability, homelessness, foster care, or kinship care may receive priority.</p></article>
+          <article><strong>Developmental needs</strong><p>Children with disabilities, delays, or additional support needs may be eligible for services.</p></article>
+        </div>
+      </section>
+
+      <section class="section ehs-next-steps">
+        <div class="section-heading">
+          <p class="eyebrow">How It Works</p>
+          <h2>Simple next steps for families.</h2>
+        </div>
+        <div class="steps">
+          <article><span>1</span><h3>Start pre-screen</h3><p>Share basic family, child, and contact details so Nana's team can review fit.</p></article>
+          <article><span>2</span><h3>We follow up</h3><p>A team member contacts you to discuss eligibility indicators and care needs.</p></article>
+          <article><span>3</span><h3>Review options</h3><p>We talk through EHS, available openings, documents, tours, and transportation questions.</p></article>
+          <article><span>4</span><h3>Plan care</h3><p>If eligible and space is available, we help your family prepare for a strong start.</p></article>
+        </div>
+      </section>
+
+      <section class="ehs-service-strip">
+        <div>
+          <h2>Service area</h2>
+          <p>Early Head Start services through Nana's Cozy Corner are available to families in Milwaukee zip codes 53205, 53209, 53210, 53212, and 53216.</p>
+        </div>
+        <div>
+          <h2>Questions?</h2>
+          <p>For EHS eligibility questions, contact WECA at <a href="tel:16087291072">608-729-1072</a> or <a href="mailto:CClark@wisconsinearlychildhood.org">CClark@wisconsinearlychildhood.org</a>.</p>
+        </div>
+        <button class="button light" type="button" data-modal-open="ehs-prescreen-modal">Check EHS Eligibility</button>
+      </section>
+    </main>
+
+    <div class="modal" id="ehs-prescreen-modal" role="dialog" aria-modal="true" aria-labelledby="ehs-modal-title" hidden>
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-panel" role="document">
+        <button class="modal-close" type="button" data-modal-close aria-label="Close pre-screen form">Close</button>
+        <form class="form-card full-form modal-form" data-endpoint="/api/ehs-screenings" data-pipeline-status="EHS Review">
+          <p class="eyebrow">Early Head Start</p>
+          <h2 id="ehs-modal-title">EHS Pre-Screen</h2>
+          <p class="modal-intro">This does not submit a formal application yet. It helps Nana's team understand whether EHS may be a fit before follow-up.</p>
           <input type="hidden" name="source" value="public_website_ehs_page">
           <input type="hidden" name="pipeline_status" value="EHS Review">
           <label>Parent name<input name="parent_name" autocomplete="name" required></label>
@@ -65,8 +129,8 @@
           <button class="button primary" type="submit">Check Eligibility</button>
           <p class="form-note" aria-live="polite"></p>
         </form>
-      </section>
-    </main>
+      </div>
+    </div>
     <footer class="site-footer">
       <div class="footer-brand">
         <img src="assets/nanas-logo.png" alt="Nana's Cozy Corner logo">
@@ -77,6 +141,6 @@
       </div>
       <a href="enrollment.html">Enroll Now</a>
     </footer>
-    <script src="script.js"></script>
+    <script src="script.js?v=2"></script>
   </body>
 </html>
