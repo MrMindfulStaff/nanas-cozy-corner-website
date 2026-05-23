@@ -7,23 +7,71 @@
     <meta name="description" content="Contact Nana's Cozy Corner with childcare, enrollment, Early Head Start, tour, or referral questions.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,650;9..144,750&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=8">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,650;9..144,750&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=19">
   </head>
-  <body>
+  <body class="contact-page">
     <header class="site-header" data-header>
       <a class="brand" href="index.html"><img class="brand-logo" src="assets/nanas-logo.png" alt="Nana's Cozy Corner - Learn, Grow, Belong"></a>
       <nav class="desktop-nav" aria-label="Primary navigation"><a href="about.html">About</a><a href="programs.html">Programs</a><a href="early-head-start.html">Early Head Start</a><a href="enrollment.html">Enrollment</a><a href="schedule-a-tour.html">Tour</a><a href="referral-program.html">Referrals</a><a href="contact.html">Contact</a></nav>
       <div class="header-actions"><a class="header-login" href="https://elv.earlylearningventures.org/elv/login" target="_blank" rel="noopener">Existing Family Login</a><a class="header-cta" href="enrollment.html">Enroll Now</a></div>
     </header>
     <main>
-      <section class="page-hero"><div><p class="eyebrow">Contact</p><h1>Ask a question or tell us what you need.</h1><p>Use this page for general messages about programs, enrollment, Early Head Start, tours, referrals, or next steps.</p></div></section>
-      <section class="section service-layout">
-        <div><h2>What can we help with?</h2><p class="lead">If you are not ready for a specific form yet, send a general message. Nana's team can help route you to enrollment, a tour, EHS pre-screening, or referral support.</p><ul class="detail-list"><li>Enrollment and program questions</li><li>Tour scheduling questions</li><li>Early Head Start questions</li><li>Referral program questions</li><li>General family support questions</li></ul></div>
-        <aside class="info-panel"><h3>Contact details</h3><p>4006 N 42nd Street, Milwaukee, WI 53216</p><p><a href="mailto:Info@nanascozycorner.com">Info@nanascozycorner.com</a></p><p><a href="tel:14144426262">414-442-NANA</a></p><a class="button light" href="enrollment.html">Start Enrollment</a></aside>
+      <section class="contact-hero">
+        <div class="contact-hero-copy">
+          <p class="eyebrow">Contact Nana's</p>
+          <h1>Questions, next steps, and warm handoffs start here.</h1>
+          <p>Reach out about enrollment, Early Head Start, tours, referrals, or general family support. Nana's team will help route your message to the right next step.</p>
+          <div class="contact-hero-actions">
+            <a class="button primary" href="#contact-form">Send a Message</a>
+            <a class="button secondary" href="tel:14144426262">Call 414-442-NANA</a>
+          </div>
+        </div>
+        <div class="contact-hero-photo">
+          <img src="assets/contact-family-support.png" alt="A Nana's Cozy Corner team member speaking with a parent and child at the front desk">
+        </div>
       </section>
-      <section class="page-form-section">
-        <form class="form-card full-form" data-endpoint="/api/contact" data-pipeline-status="New Inquiry">
+
+      <section class="contact-quick-strip" aria-label="Contact options">
+        <a href="tel:14144426262">
+          <span>Call</span>
+          <strong>414-442-NANA</strong>
+        </a>
+        <a href="mailto:Info@nanascozycorner.com">
+          <span>Email</span>
+          <strong>Info@nanascozycorner.com</strong>
+        </a>
+        <a href="https://www.google.com/maps/search/?api=1&query=4006%20N%2042nd%20Street%2C%20Milwaukee%2C%20WI%2053216" target="_blank" rel="noopener">
+          <span>Visit</span>
+          <strong>4006 N 42nd Street</strong>
+        </a>
+      </section>
+
+      <section class="section contact-help-section">
+        <div class="section-heading">
+          <p class="eyebrow">How we can help</p>
+          <h2>Tell us what you need and we will guide the next step.</h2>
+        </div>
+        <div class="contact-help-grid">
+          <article><span>01</span><h3>Enrollment questions</h3><p>Ask about openings, age groups, documents, start dates, and care schedules.</p></article>
+          <article><span>02</span><h3>Tour support</h3><p>Need help choosing a time or knowing what to expect before you visit? Send it here.</p></article>
+          <article><span>03</span><h3>Early Head Start</h3><p>We can help families understand EHS basics and where eligibility review fits in.</p></article>
+          <article><span>04</span><h3>Referrals</h3><p>Ask about Cozy Circle referral next steps, eligibility, and reward timing.</p></article>
+        </div>
+      </section>
+
+      <section class="contact-form-band" id="contact-form">
+        <div class="contact-form-intro">
+          <p class="eyebrow">Send a Message</p>
+          <h2>We are ready to hear from you.</h2>
+          <p>Use this general contact form when you are not sure which page fits. Your submission is structured so it can connect to Nana's Brain later.</p>
+          <div class="contact-detail-list">
+            <p><strong>Location</strong>4006 N 42nd Street, Milwaukee, WI 53216</p>
+            <p><strong>Email</strong><a href="mailto:Info@nanascozycorner.com">Info@nanascozycorner.com</a></p>
+            <p><strong>Phone</strong><a href="tel:14144426262">414-442-NANA</a></p>
+          </div>
+        </div>
+        <form class="form-card full-form contact-form-card" data-endpoint="/api/contact" data-pipeline-status="New Inquiry">
           <h2>Contact Nana's Cozy Corner</h2>
           <input type="hidden" name="source" value="public_website_contact_page">
           <input type="hidden" name="pipeline_status" value="New Inquiry">
@@ -31,7 +79,7 @@
           <label>Last name<input name="last_name" autocomplete="family-name" required></label>
           <label>Email<input name="email" type="email" autocomplete="email" required></label>
           <label>Phone<input name="phone" type="tel" autocomplete="tel"></label>
-          <label>Reason for contact<select name="contact_reason" required><option value="">Select one</option><option>Enrollment question</option><option>Early Head Start question</option><option>Referral question</option><option>General message</option></select></label>
+          <label>Reason for contact<select name="contact_reason" required><option value="">Select one</option><option>Enrollment question</option><option>Early Head Start question</option><option>Tour question</option><option>Referral question</option><option>General message</option></select></label>
           <label class="full">Message<textarea name="message" rows="4" required></textarea></label>
           <button class="button primary" type="submit">Send Message</button>
           <p class="form-note" aria-live="polite"></p>
@@ -48,6 +96,6 @@
       </div>
       <a href="enrollment.html">Enroll Now</a>
     </footer>
-    <script src="script.js"></script>
+    <script src="script.js?v=2"></script>
   </body>
 </html>
