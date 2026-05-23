@@ -7,22 +7,105 @@
     <meta name="description" content="Refer a family to Nana's Cozy Corner through the Cozy Circle Referral Program.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,650;9..144,750&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=8">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,650;9..144,750&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=16">
   </head>
-  <body>
+  <body class="referral-page">
     <header class="site-header" data-header>
       <a class="brand" href="index.html"><img class="brand-logo" src="assets/nanas-logo.png" alt="Nana's Cozy Corner - Learn, Grow, Belong"></a>
       <nav class="desktop-nav" aria-label="Primary navigation"><a href="about.html">About</a><a href="programs.html">Programs</a><a href="early-head-start.html">Early Head Start</a><a href="enrollment.html">Enrollment</a><a href="schedule-a-tour.html">Tour</a><a href="referral-program.html">Referrals</a><a href="contact.html">Contact</a></nav>
       <div class="header-actions"><a class="header-login" href="https://elv.earlylearningventures.org/elv/login" target="_blank" rel="noopener">Existing Family Login</a><a class="header-cta" href="enrollment.html">Enroll Now</a></div>
     </header>
+
     <main>
-      <section class="page-hero referral-page-hero"><div><p class="eyebrow">Cozy Circle Referral Program</p><h1>You earn when they stay.</h1><p>Current parents, staff members, and approved community partners can refer families to Nana's Cozy Corner.</p></div></section>
-      <section class="section split referral-section">
-        <div><h2>$750 referral bonus</h2><p class="lead">Qualified referrals may earn a $750 bonus after 60 consecutive days of enrollment. Early Head Start eligible referrals may qualify for a bonus boost after eligibility confirmation.</p><div class="referral-callout"><strong>Who can refer?</strong><p>Current parents, staff members, and approved community partners.</p></div></div>
-        <div class="referral-rules"><h3>How it works</h3><ol><li>Refer a family using the form below.</li><li>We contact the referred family and review care needs.</li><li>If they enroll and stay 60 consecutive days, the bonus is reviewed.</li></ol></div>
+      <section class="referral-flyer-hero">
+        <div class="referral-flyer-copy">
+          <img class="referral-flyer-logo" src="assets/nanas-logo.png" alt="Nana's Cozy Corner logo">
+          <h1>Refer a Family. <span>Change a Future.</span></h1>
+          <strong class="referral-flyer-ribbon">You earn when they stay!</strong>
+          <p>Help another family find a safe, nurturing place for their child and earn a generous reward through our Cozy Circle Referral Program.</p>
+          <a class="button primary" href="#referral-form">Refer a Family</a>
+        </div>
+        <div class="referral-flyer-photo">
+          <img src="assets/hero-classroom.png" alt="A teacher reading with smiling children in a warm classroom">
+          <div class="referral-ehs-badge">
+            <strong>Proud EHS Partnership</strong>
+            <span>Eligible referrals may receive a bonus boost after EHS verification.</span>
+          </div>
+        </div>
       </section>
-      <section class="page-form-section">
+
+      <section class="section referral-flyer-grid">
+        <div class="referral-payout-card">
+          <span class="referral-mini-ribbon">Earn up to</span>
+          <div class="referral-payout-amount">$750!</div>
+          <p>Refer a new family to Nana's Cozy Corner.</p>
+          <div class="referral-payout-split">
+            <article>
+              <span>Base Referral Bonus</span>
+              <strong>Up to $500</strong>
+              <p>Paid after 60 consecutive days of enrollment.</p>
+            </article>
+            <article>
+              <span>EHS Bonus Boost</span>
+              <strong>+50%</strong>
+              <p>For verified EHS-eligible referrals, up to an additional $250.</p>
+            </article>
+          </div>
+          <strong class="referral-total">Total potential payout: up to $750</strong>
+          <small>EHS eligibility must be verified and the child must be officially accepted into EHS.</small>
+        </div>
+
+        <aside class="referral-why-card">
+          <h2>Why Refer?</h2>
+          <article><span>&hearts;</span><div><strong>Help a family</strong><p>Give another child the gift of quality care and early learning.</p></div></article>
+          <article><span>$</span><div><strong>Earn a reward</strong><p>You earn when they stay.</p></div></article>
+          <article><span>+</span><div><strong>Build our community</strong><p>Stronger families. Brighter futures. Together.</p></div></article>
+        </aside>
+      </section>
+
+      <section class="section referral-flow-section">
+        <div class="section-heading">
+          <p class="eyebrow">How It Works</p>
+          <h2>Four simple steps from referral to reward.</h2>
+        </div>
+        <div class="referral-flow">
+          <article><span>1</span><h3>Refer</h3><p>Tell friends, family, or neighbors about Nana's Cozy Corner.</p></article>
+          <article><span>2</span><h3>They Enroll</h3><p>The new family enrolls their child full-time.</p></article>
+          <article><span>3</span><h3>They Stay</h3><p>Child remains active for 60 consecutive calendar days.</p></article>
+          <article><span>4</span><h3>You Earn</h3><p>Bonus is paid on the next payroll or ACH run after day 60.</p></article>
+        </div>
+      </section>
+
+      <section class="section referral-details-band">
+        <div class="referral-quality-card">
+          <h2>Quality care. Strong starts. Brighter futures.</h2>
+          <p>When you refer a family to Nana's Cozy Corner, you're not just earning a bonus. You're helping a child thrive and supporting our mission to build a stronger community.</p>
+          <div>
+            <span>Nurturing environment</span>
+            <span>Early learning excellence</span>
+            <span>Family support</span>
+            <span>EHS partnership</span>
+          </div>
+        </div>
+        <aside class="referral-eligibility-panel">
+          <h2>Eligibility</h2>
+          <ul>
+            <li>Child must be enrolled full-time</li>
+            <li>Child must remain active for 60 consecutive calendar days</li>
+            <li>No pending withdrawal or termination notice</li>
+            <li>Referrer must be a current parent, staff member, or approved community partner</li>
+          </ul>
+          <h3>Program safeguards</h3>
+          <ul>
+            <li>Bonuses paid only after the retention milestone</li>
+            <li>EHS bonus paid only after eligibility confirmation</li>
+            <li>Maximum of 2 referral payouts per person per quarter</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="page-form-section referral-form-section" id="referral-form">
         <form class="form-card full-form" data-endpoint="/api/referrals" data-pipeline-status="New Inquiry">
           <h2>Referral Form</h2>
           <input type="hidden" name="source" value="public_website_referral_page">
@@ -40,6 +123,7 @@
         </form>
       </section>
     </main>
+
     <footer class="site-footer">
       <div class="footer-brand">
         <img src="assets/nanas-logo.png" alt="Nana's Cozy Corner logo">
@@ -50,6 +134,6 @@
       </div>
       <a href="enrollment.html">Enroll Now</a>
     </footer>
-    <script src="script.js"></script>
+    <script src="script.js?v=2"></script>
   </body>
 </html>
