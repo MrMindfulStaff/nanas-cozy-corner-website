@@ -8,23 +8,87 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,650;9..144,750&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=8">
+    <link rel="stylesheet" href="styles.css?v=12">
   </head>
-  <body>
+  <body class="tour-page">
     <header class="site-header" data-header>
       <a class="brand" href="index.html"><img class="brand-logo" src="assets/nanas-logo.png" alt="Nana's Cozy Corner - Learn, Grow, Belong"></a>
       <nav class="desktop-nav" aria-label="Primary navigation"><a href="about.html">About</a><a href="programs.html">Programs</a><a href="early-head-start.html">Early Head Start</a><a href="enrollment.html">Enrollment</a><a href="schedule-a-tour.html">Tour</a><a href="referral-program.html">Referrals</a><a href="contact.html">Contact</a></nav>
       <div class="header-actions"><a class="header-login" href="https://elv.earlylearningventures.org/elv/login" target="_blank" rel="noopener">Existing Family Login</a><a class="header-cta" href="enrollment.html">Enroll Now</a></div>
     </header>
+
     <main>
-      <section class="page-hero"><div><p class="eyebrow">Book a Tour</p><h1>Visit our facility and see for yourself.</h1><p>Book a 1-hour tour with time for questions, classroom conversation, and next-step guidance.</p></div></section>
-      <section class="section service-layout">
-        <div><h2>Service description</h2><p class="lead">A 1-hour tour with time for questions. Tour requests help Nana's team prepare for your visit so we can review your child's age, your care needs, possible start timing, and any Early Head Start questions.</p><ul class="detail-list"><li>Classroom environment and daily routines</li><li>Age group fit and program availability</li><li>Parent communication expectations</li><li>Enrollment documents and next steps</li><li>Early Head Start questions if applicable</li></ul></div>
-        <aside class="info-panel"><h3>Before you arrive</h3><p>Bring any questions about schedule, care needs, eligibility, and start dates. The goal is to make the next step feel clear.</p></aside>
+      <section class="tour-hero">
+        <div class="tour-hero-copy">
+          <span class="foundation-pill">Schedule a Tour</span>
+          <h1>Come see where little hearts feel at home.</h1>
+          <p>Visit Nana's Cozy Corner, meet our team, explore the classrooms, and ask questions about care, enrollment, EHS eligibility, and transportation.</p>
+          <div class="tour-hero-actions">
+            <button class="button primary" type="button" data-modal-open="tour-modal">Schedule a Tour</button>
+            <a class="button light" href="tel:14144426262">Call 414-442-6262</a>
+          </div>
+          <div class="tour-support-note">
+            <strong>Tours help families feel confident.</strong>
+            <span>Bring your questions. We will walk through the details with you.</span>
+          </div>
+        </div>
+        <div class="tour-hero-photo">
+          <img src="assets/schedule-tour-welcome.png" alt="A family being welcomed for a childcare center tour">
+        </div>
       </section>
-      <section class="page-form-section">
-        <form class="form-card full-form" data-endpoint="/api/tour-requests" data-pipeline-status="Tour Scheduled">
-          <h2>Tour Request</h2>
+
+      <section class="section tour-overview">
+        <div class="section-heading">
+          <p class="eyebrow">What to Expect</p>
+          <h2>A one-hour visit with room for real questions.</h2>
+          <p>Tour requests help Nana's team prepare for your visit so we can review your child's age, your care needs, possible start timing, and any Early Head Start questions.</p>
+        </div>
+        <div class="tour-card-grid">
+          <article><span>1</span><h3>Meet the team</h3><p>Get a feel for the people who will welcome, guide, and care for your child.</p></article>
+          <article><span>2</span><h3>See the classrooms</h3><p>Walk through the rooms, routines, play areas, and spaces children use each day.</p></article>
+          <article><span>3</span><h3>Talk through fit</h3><p>Discuss age group, schedule, program availability, EHS questions, and transportation.</p></article>
+        </div>
+      </section>
+
+      <section class="section tour-prepare" id="tour-details">
+        <div>
+          <p class="eyebrow">Before You Arrive</p>
+          <h2>We make the next step feel clear.</h2>
+          <p class="lead">Bring any questions about schedule, care needs, eligibility, start dates, parent communication, or enrollment documents.</p>
+          <button class="button primary" type="button" data-modal-open="tour-modal">Request Tour Time</button>
+        </div>
+        <div class="tour-detail-grid">
+          <div class="tour-detail-image">
+            <img src="assets/referral-community.png" alt="Families and childcare staff connecting inside a warm classroom">
+            <span>Warm welcomes, clear answers, and a look at daily care.</span>
+          </div>
+          <article><strong>Care needs</strong><p>Share your child's age, schedule needs, and any timing you are considering.</p></article>
+          <article><strong>Program questions</strong><p>Ask about infants, toddlers, preschool, school-age care, and Early Head Start support.</p></article>
+          <article><strong>Daily routines</strong><p>Learn about classroom flow, meals, rest, play, communication, and safety expectations.</p></article>
+          <article><strong>Enrollment steps</strong><p>Review documents, next steps, placement timing, and how our team follows up.</p></article>
+        </div>
+      </section>
+
+      <section class="tour-cta-strip">
+        <div>
+          <h2>Ready to visit Nana's Cozy Corner?</h2>
+          <p>Choose a preferred tour date and time, and our team will follow up to confirm.</p>
+        </div>
+        <div class="tour-strip-actions">
+          <button class="button primary" type="button" data-modal-open="tour-modal">Schedule a Tour</button>
+          <a class="button light" href="contact.html">Ask a Question</a>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal" id="tour-modal" role="dialog" aria-modal="true" aria-labelledby="tour-modal-title" hidden>
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-panel" role="document">
+        <button class="modal-close" type="button" data-modal-close aria-label="Close tour request form">Close</button>
+        <form class="form-card full-form modal-form" data-endpoint="/api/tour-requests" data-pipeline-status="Tour Scheduled">
+          <p class="eyebrow">Schedule a Tour</p>
+          <h2 id="tour-modal-title">Tour Request</h2>
+          <p class="modal-intro">Tell us when you would like to visit. Nana's team will follow up to confirm your tour time.</p>
           <input type="hidden" name="source" value="public_website_tour_page">
           <input type="hidden" name="pipeline_status" value="Tour Scheduled">
           <label>Parent name<input name="parent_name" autocomplete="name" required></label>
@@ -37,8 +101,9 @@
           <button class="button primary" type="submit">Schedule a Tour</button>
           <p class="form-note" aria-live="polite"></p>
         </form>
-      </section>
-    </main>
+      </div>
+    </div>
+
     <footer class="site-footer">
       <div class="footer-brand">
         <img src="assets/nanas-logo.png" alt="Nana's Cozy Corner logo">
@@ -49,6 +114,6 @@
       </div>
       <a href="enrollment.html">Enroll Now</a>
     </footer>
-    <script src="script.js"></script>
+    <script src="script.js?v=2"></script>
   </body>
 </html>
