@@ -8,30 +8,88 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,650;9..144,750&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=8">
+    <link rel="stylesheet" href="styles.css?v=11">
   </head>
-  <body>
+  <body class="enrollment-page">
     <header class="site-header" data-header>
       <a class="brand" href="index.html"><img class="brand-logo" src="assets/nanas-logo.png" alt="Nana's Cozy Corner - Learn, Grow, Belong"></a>
       <nav class="desktop-nav" aria-label="Primary navigation"><a href="about.html">About</a><a href="programs.html">Programs</a><a href="early-head-start.html">Early Head Start</a><a href="enrollment.html">Enrollment</a><a href="schedule-a-tour.html">Tour</a><a href="referral-program.html">Referrals</a><a href="contact.html">Contact</a></nav>
       <div class="header-actions"><a class="header-login" href="https://elv.earlylearningventures.org/elv/login" target="_blank" rel="noopener">Existing Family Login</a><a class="header-cta" href="enrollment.html">Enroll Now</a></div>
     </header>
+
     <main>
-      <section class="page-hero">
-        <div><p class="eyebrow">Enrollment</p><h1>Request childcare services.</h1><p>Tell us how many children need care, their ages, whether transportation is needed, and what schedule works for your family.</p></div>
-      </section>
-      <section class="section process">
-        <div class="section-heading"><p class="eyebrow">Enrollment path</p><h2>What happens after you submit interest?</h2></div>
-        <div class="steps">
-          <article><span>1</span><h3>Submit interest</h3><p>Share parent contact details, child information, program age group, and timing.</p></article>
-          <article><span>2</span><h3>We contact you</h3><p>Nana's team confirms care needs and answers parent questions.</p></article>
-          <article><span>3</span><h3>Tour + eligibility review</h3><p>Families can visit the center and discuss Early Head Start if applicable.</p></article>
-          <article><span>4</span><h3>Placement next steps</h3><p>Complete documents, review start date, and prepare for care.</p></article>
+      <section class="enrollment-hero">
+        <div class="enrollment-hero-copy">
+          <span class="foundation-pill">Now Enrolling New Families</span>
+          <h1>Start care with a team that knows your child.</h1>
+          <p>Tell us what your family needs, and Nana's team will follow up about program fit, start timing, EHS questions, transportation, and next steps.</p>
+          <div class="enrollment-hero-actions">
+            <button class="button primary" type="button" data-modal-open="enrollment-modal">Start Enrollment</button>
+            <a class="button light" href="schedule-a-tour.html">Schedule a Tour</a>
+          </div>
+          <div class="enrollment-support-note">
+            <strong>We review every request personally.</strong>
+            <span>Parent details, child ages, care schedule, transportation needs, and payment options help us guide you clearly.</span>
+          </div>
+        </div>
+        <div class="enrollment-hero-photo">
+          <img src="assets/enrollment-intake.png" alt="A childcare staff member reviewing enrollment information with a parent and child">
         </div>
       </section>
-      <section class="page-form-section">
-        <form class="form-card full-form" data-endpoint="/api/leads" data-pipeline-status="New Inquiry">
-          <h2>Service Request</h2>
+
+      <section class="section enrollment-overview">
+        <div class="section-heading">
+          <p class="eyebrow">Enrollment path</p>
+          <h2>What happens after you submit interest?</h2>
+          <p>Enrollment starts with a simple request. From there, Nana's team helps your family understand availability, classroom fit, documents, and support options.</p>
+        </div>
+        <div class="steps">
+          <article><span>1</span><h3>Submit interest</h3><p>Share parent contact details, child information, program age group, timing, and schedule needs.</p></article>
+          <article><span>2</span><h3>We contact you</h3><p>Nana's team confirms care needs, preferred contact method, and any questions you already have.</p></article>
+          <article><span>3</span><h3>Tour + review</h3><p>Families can visit the center and discuss Early Head Start, transportation, and classroom fit if applicable.</p></article>
+          <article><span>4</span><h3>Placement next steps</h3><p>Complete documents, review start date, and prepare your child for a warm first day.</p></article>
+        </div>
+      </section>
+
+      <section class="section enrollment-fit" id="enrollment-details">
+        <div>
+          <p class="eyebrow">What We Review</p>
+          <h2>We use your request to understand the right care path.</h2>
+          <p class="lead">The enrollment request is not a final application. It gives our team the details needed to contact you with helpful next steps.</p>
+          <button class="button primary" type="button" data-modal-open="enrollment-modal">Start Enrollment</button>
+        </div>
+        <div class="enrollment-card-grid">
+          <div class="enrollment-fit-image">
+            <img src="assets/schedule-tour-welcome.png" alt="A family being welcomed into a warm childcare classroom">
+            <span>Tours help families feel confident before care begins.</span>
+          </div>
+          <article><strong>Child and program fit</strong><p>We review child ages, classroom group, care type, and the number of children needing care.</p></article>
+          <article><strong>Schedule and start date</strong><p>Desired start date, full-time or part-time care, and drop-off and pick-up timing help us plan availability.</p></article>
+          <article><strong>Support needs</strong><p>Transportation, Early Head Start interest, payment type, and family notes help us guide you to the right next step.</p></article>
+          <article><strong>Parent communication</strong><p>Phone, email, and preferred contact details help our team follow up quickly and clearly.</p></article>
+        </div>
+      </section>
+
+      <section class="enrollment-cta-strip">
+        <div>
+          <h2>Ready to take the next step?</h2>
+          <p>Start enrollment interest now, or schedule a tour if you want to visit first.</p>
+        </div>
+        <div class="enrollment-strip-actions">
+          <button class="button primary" type="button" data-modal-open="enrollment-modal">Enroll Now</button>
+          <a class="button light" href="schedule-a-tour.html">Schedule a Tour</a>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal" id="enrollment-modal" role="dialog" aria-modal="true" aria-labelledby="enrollment-modal-title" hidden>
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-panel" role="document">
+        <button class="modal-close" type="button" data-modal-close aria-label="Close enrollment form">Close</button>
+        <form class="form-card full-form modal-form" data-endpoint="/api/leads" data-pipeline-status="New Inquiry">
+          <p class="eyebrow">Enrollment</p>
+          <h2 id="enrollment-modal-title">Service Request</h2>
+          <p class="modal-intro">Share your family's care needs. Nana's team will follow up about availability, documents, and next steps.</p>
           <input type="hidden" name="source" value="public_website_enrollment_page">
           <input type="hidden" name="pipeline_status" value="New Inquiry">
           <label>First name<input name="first_name" autocomplete="given-name" required></label>
@@ -52,8 +110,9 @@
           <button class="button primary" type="submit">Enroll Now</button>
           <p class="form-note" aria-live="polite"></p>
         </form>
-      </section>
-    </main>
+      </div>
+    </div>
+
     <footer class="site-footer">
       <div class="footer-brand">
         <img src="assets/nanas-logo.png" alt="Nana's Cozy Corner logo">
@@ -64,6 +123,6 @@
       </div>
       <a href="enrollment.html">Enroll Now</a>
     </footer>
-    <script src="script.js"></script>
+    <script src="script.js?v=2"></script>
   </body>
 </html>
