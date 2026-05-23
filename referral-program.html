@@ -24,7 +24,7 @@
           <h1>Refer a Family. <span>Change a Future.</span></h1>
           <strong class="referral-flyer-ribbon">You earn when they stay!</strong>
           <p>Help another family find a safe, nurturing place for their child and earn a generous reward through our Cozy Circle Referral Program.</p>
-          <a class="button primary" href="#referral-form">Refer a Family</a>
+          <button class="button primary" type="button" data-modal-open="referral-modal">Refer a Family</button>
         </div>
         <div class="referral-flyer-photo">
           <img src="assets/referral-family-introduction.png" alt="A parent introducing another caregiver to a friendly daycare team member">
@@ -105,9 +105,16 @@
         </aside>
       </section>
 
-      <section class="page-form-section referral-form-section" id="referral-form">
-        <form class="form-card full-form" data-endpoint="/api/referrals" data-pipeline-status="New Inquiry">
-          <h2>Referral Form</h2>
+    </main>
+
+    <div class="modal" id="referral-modal" role="dialog" aria-modal="true" aria-labelledby="referral-modal-title" hidden>
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-panel" role="document">
+        <button class="modal-close" type="button" data-modal-close aria-label="Close referral form">Close</button>
+        <form class="form-card full-form modal-form" data-endpoint="/api/referrals" data-pipeline-status="New Inquiry">
+          <p class="eyebrow">Cozy Circle</p>
+          <h2 id="referral-modal-title">Referral Form</h2>
+          <p class="modal-intro">Tell us who you are referring. Nana's team will reach out to the family and review eligibility after enrollment.</p>
           <input type="hidden" name="source" value="public_website_referral_page">
           <input type="hidden" name="pipeline_status" value="New Inquiry">
           <label>Referrer name<input name="referrer_name" required></label>
@@ -121,8 +128,8 @@
           <button class="button primary" type="submit">Refer a Family</button>
           <p class="form-note" aria-live="polite"></p>
         </form>
-      </section>
-    </main>
+      </div>
+    </div>
 
     <footer class="site-footer">
       <div class="footer-brand">
