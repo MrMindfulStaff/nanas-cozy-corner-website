@@ -1,0 +1,3 @@
+import { writeFile } from 'node:fs/promises';
+// Optional preview-only viewport harness, never part of the normal build.
+await writeFile('public/preview-qa.html',`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><title>Nana’s mobile preview check</title><style>body{background:#e9e5dc;font:15px system-ui;margin:20px}iframe{display:block;width:390px;height:844px;border:1px solid #aaa;border-radius:12px;background:white}a{margin-right:20px}</style><p>Mobile viewport · 390 × 844</p><p><a href="/" target="mobile">Home</a><a href="/enrollment.html" target="mobile">Availability</a><a href="/schedule-a-tour.html" target="mobile">Tour</a></p><iframe name="mobile" title="Mobile website preview" src="/"></iframe></html>`);
