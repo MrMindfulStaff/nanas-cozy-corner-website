@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {notify,bridgeAuthorized} from '../lib/brain.js';
+test('booked tour sends separate staff and parent messages with stable retry keys',async()=>{
+ const prior=globalThis.fetch;const previous={...process.env};Object.assign(process.env,{WEBSITE_INTAKE_SECRET:'a'.repeat(64),RESEND_API_KEY:'test',INQUIRY_FROM:'forms@example.com',INQUIRY_TO:'kelly@example.com'});
+ const sent=[];let patch;
+ const lead={id:'c1234567890',name:'QA',kind:'tour',contact:'parent@example.com',email:'parent@example.com',phone:'4145550100',details:{message:'QA'},status:'TOUR_BOOKED',notificationVersion:1,notificationState:'PENDING',confirmationState:'PENDING',slot:{state:'BOOKED',startsAt:'2026-10-10T15:00:00Z',endsAt:'2026-10-10T15:30:00Z'}};
+ globalThis.fetch=async(url,options)=>{if(url.includes('resend.com')){sent.push({body:JSON.parse(options.body),key:options.headers['Idempotency-Key']});return Response.json({id:'receipt'});}if(options.method==='PATCH'){patch=JSON.parse(options.body);return Response.json({ok:true});}return Response.json({lead});};
+ try{assert.equal(await notify(lead.id),true);assert.deepEqual(sent.map(x=>x.body.to),[['kelly@example.com'],['parent@example.com']]);assert.equal(patch.confirmationState,'ACCEPTED');assert.equal(patch.notificationState,'ACCEPTED');assert.match(sent[1].body.text,/Your tour is booked/);const keys=sent.map(x=>x.key);await notify(lead.id);assert.deepEqual(sent.slice(2).map(x=>x.key),keys);}finally{globalThis.fetch=prior;for(const key of ['WEBSITE_INTAKE_SECRET','RESEND_API_KEY','INQUIRY_FROM','INQUIRY_TO']){if(previous[key]===undefined)delete process.env[key];else process.env[key]=previous[key];}}
+});
+test('notification endpoint bridge refuses missing and mismatched credentials',()=>{const old=process.env.WEBSITE_INTAKE_SECRET;process.env.WEBSITE_INTAKE_SECRET='a'.repeat(64);try{assert.equal(bridgeAuthorized(new Request('https://example.com')),false);assert.equal(bridgeAuthorized(new Request('https://example.com',{headers:{Authorization:'Bearer wrong'}})),false);}finally{if(old===undefined)delete process.env.WEBSITE_INTAKE_SECRET;else process.env.WEBSITE_INTAKE_SECRET=old;}});

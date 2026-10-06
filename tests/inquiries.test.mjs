@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { GET, POST } from '../api/inquiries.js';
 
 // No external requests or email are sent: provider boundaries are stubbed.
-const configured = {RESEND_API_KEY:'test-only-key',INQUIRY_FROM:'test@example.com',INQUIRY_TO:'inbox@example.com',TURNSTILE_SITE_KEY:'test-site',TURNSTILE_SECRET_KEY:'test-secret',INQUIRY_ALLOWED_HOSTS:'www.nanascozycorner.com'};
+const configured = {WEBSITE_INTAKE_SECRET:'',RESEND_API_KEY:'test-only-key',INQUIRY_FROM:'test@example.com',INQUIRY_TO:'inbox@example.com',TURNSTILE_SITE_KEY:'test-site',TURNSTILE_SECRET_KEY:'test-secret',INQUIRY_ALLOWED_HOSTS:'www.nanascozycorner.com'};
 const valid = {kind:'availability',parent_name:'Website QA',contact:'qa@example.com',child_age:'2 years',start_timing:'Later / planning ahead',schedule:'Monday–Friday',request_id:'550e8400-e29b-41d4-a716-446655440000',turnstile_token:'test-token'};
 const request = (body=valid,origin='https://www.nanascozycorner.com') => new Request('https://www.nanascozycorner.com/api/inquiries',{method:'POST',headers:{origin,'Content-Type':'application/json'},body:JSON.stringify(body)});
 const withEnvironment = async (env,fn) => {
@@ -55,12 +55,21 @@ test('success requires provider receipt, uses fixed recipient, and deduplicates 
   assert.doesNotMatch(payload.text,/attacker|Enrolled/);
   assert.equal(deliveries[0].headers['Idempotency-Key'],deliveries[1].headers['Idempotency-Key']);
 }));
-test('tour requests stay requests and reject a past date',async()=>withEnvironment(configured,async()=>{
-  const tour={...valid,kind:'tour',preferred_date:'2020-01-01'};
-  assert.equal((await POST(request(tour))).status,400);
-  await fakeFetch(async(url,options)=>{
-    if(url.includes('siteverify'))return verified();
-    assert.match(JSON.parse(options.body).text,/Tour requested — staff confirmation required/);
-    return Response.json({id:'tour-test-id'});
-  },async()=>assert.equal((await POST(request({...tour,preferred_date:'2099-01-01'}))).status,202));
+
+const tour={...valid,kind:'tour',email:'qa@example.com',phone:'4145550100',slot_id:'slot-test'};
+test('tours require a real time, email, and phone; never fall back to a fake booking',async()=>withEnvironment(configured,async()=>{
+ assert.equal((await POST(request({...valid,kind:'tour'}))).status,400);
+ await fakeFetch(async()=>verified(),async()=>assert.equal((await POST(request(tour))).status,503));
+}));
+test('an unavailable slot cannot send confirmations',async()=>withEnvironment({...configured,WEBSITE_INTAKE_SECRET:'a'.repeat(64)},async()=>{
+ let mails=0;
+ await fakeFetch(async(url)=>{if(url.includes('siteverify'))return verified();if(url.includes('resend'))mails++;return Response.json({error:'Time unavailable'},{status:409});},async()=>assert.equal((await POST(request(tour))).status,409));
+ assert.equal(mails,0);
+}));
+test('saved tour survives email failure and reports it honestly',async()=>withEnvironment({...configured,WEBSITE_INTAKE_SECRET:'a'.repeat(64)},async()=>{
+ await fakeFetch(async(url,options)=>{
+  if(url.includes('siteverify'))return verified();
+  if(url.includes('website-intake')&&options.method==='POST')return Response.json({ok:true,id:'lead-test',booked:true});
+  throw Error('mail service unavailable');
+ },async()=>{const result=await (await POST(request(tour))).json();assert.equal(result.booked,true);assert.equal(result.saved,true);assert.equal(result.emailAccepted,false);});
 }));

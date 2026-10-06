@@ -78,3 +78,7 @@ image alternative text; it is not presented as proof of actual staff/rooms.
 Confirm the 4006 parent arrival address before standardizing external listings;
 the external EHS listing previously used 4008. Review referral program terms
 with the owner before running a referral campaign.
+
+
+## Tours and leads bridge
+Production WEBSITE_INTAKE_SECRET must match the dedicated secret on Nana’s Brain. All direct submissions save there before success. Ms. Kelly still receives notifications via INQUIRY_TO. Tour slots are explicitly published by authorized staff in /tours-leads; no operating-hour slots are auto-created. Tours require email and phone. Bookings are durable even if email fails, with manual retry in Nana’s Brain. Email ACCEPTED means provider accepted, not inbox delivered.

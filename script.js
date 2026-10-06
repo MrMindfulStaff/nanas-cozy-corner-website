@@ -31,7 +31,7 @@
   const mailLink = draft.querySelector('[data-email-link]');
   const kind = form.dataset.inquiry;
   const titles = { availability:'Childcare availability', tour:'Tour request', ehs:'Early Head Start question', contact:'Website inquiry', referral:'Referral question' };
-  const labels = { parent_name:'Name', contact:'Reply by phone or email', child_age:'Child’s age', start_timing:'Start timing', schedule:'Days and hours needed', transportation:'Transportation', message:'Message', zip_code:'ZIP code', preferred_date:'Preferred tour date', preferred_time:'Preferred time of day', reason:'Question about', referrer_type:'Connection to Nana’s' };
+  const labels = { parent_name:'Name', email:'Email', phone:'Phone', slot_id:'Tour time reference', contact:'Reply by phone or email', child_age:'Child’s age', start_timing:'Start timing', schedule:'Days and hours needed', transportation:'Transportation', message:'Message', zip_code:'ZIP code', preferred_date:'Preferred tour date', preferred_time:'Preferred time of day', reason:'Question about', referrer_type:'Connection to Nana’s' };
   let online = false, widgetId = null, sending = false, started = false;
   let requestId = crypto.randomUUID();
   const contact = form.elements.namedItem('contact');
@@ -67,6 +67,7 @@
     event.preventDefault();
     if (sending) return;
     const data = dataFromForm();
+    if(kind==='tour') data.contact=data.email;
     const contactValue = (data.contact || '').trim();
     const validContact = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactValue) || (/^[+()\d\s.\-]+$/.test(contactValue) && contactValue.replace(/\D/g,'').length >= 10 && contactValue.replace(/\D/g,'').length <= 15);
     if (!validContact) { contact.setCustomValidity('Enter a valid email address or a phone number with area code.'); contact.reportValidity(); return; }
@@ -79,12 +80,13 @@
     submit.disabled = true;
     setStatus('Sending your request…');
     try {
-      const response = await fetch('/api/inquiries', { method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify({ ...data, request_id:requestId, turnstile_token:token }), signal:AbortSignal.timeout(20000) });
+      const response = await fetch('/api/inquiries', { method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify({ ...data, request_id:requestId, turnstile_token:token }), signal:AbortSignal.timeout(60000) });
       const result = await response.json();
+      if(response.status===409){setStatus(result.message || 'That time is no longer available. Choose another time.','error');await loadSlots();window.turnstile?.reset(widgetId);submit.disabled=false;return;}
       if (!response.ok || result.ok !== true || !result.id) throw new Error('DELIVERY_NOT_CONFIRMED');
-      setStatus(`Your request has been accepted for email delivery to Nana’s team. ${kind === 'tour' ? 'Your tour is not booked until the team confirms it.' : 'Our team will follow up to discuss the next step.'}`, 'success');
+      setStatus(result.booked ? `Your tour is booked. ${result.emailAccepted ? 'Your confirmation email is on its way.' : 'Your booking is saved, but the confirmation email could not be confirmed. Please call 414-442-6262 if you do not receive it.'}` : result.saved ? 'Your inquiry is saved with Nana’s team. We’ll follow up using the contact detail you provided.' : 'Your request has been accepted for email delivery to Nana’s team.', 'success');
       track('inquiry_accepted',kind);
-      submit.textContent = 'Request sent';
+      submit.textContent = result.booked ? 'Tour booked' : 'Request sent';
       form.querySelectorAll('input,select,textarea').forEach(field => { field.disabled = true; });
       status.focus();
     } catch {
@@ -101,6 +103,20 @@
     try { await navigator.clipboard.writeText(draftText.value); copyStatus.textContent = 'Message copied. Paste it into an email to Info@nanascozycorner.com.'; }
     catch { draftText.focus(); draftText.select(); copyStatus.textContent = 'Select and copy the message above, then paste it into your email.'; }
   });
+  async function loadSlots() {
+    if(kind!=='tour')return;
+    const select=form.elements.namedItem('slot_id');
+    const message=form.querySelector('[data-slots-status]');
+    try {
+      const r=await fetch('/api/tour-slots',{signal:AbortSignal.timeout(10000)});
+      if(!r.ok)throw new Error();
+      const {slots}=await r.json();
+      select.replaceChildren(new Option(slots.length?'Choose a time':'No open times right now',''));
+      for(const slot of slots){const label=new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}).format(new Date(slot.startsAt));select.add(new Option(label,slot.id));}
+      message.textContent=slots.length?'Times are shown in Milwaukee time. Your email confirmation follows a successful booking.':'Please call 414-442-6262 to arrange a visit. More times will appear here when the team publishes them.';
+    } catch {select.replaceChildren(new Option('Online times unavailable',''));message.textContent='Please call 414-442-6262 to arrange your tour.';}
+  }
+  loadSlots();
   // If configuration, network, or the challenge is unavailable, email/call
   // remains available and the website never reports a fictitious receipt.
   fetch('/api/inquiries', { headers:{ Accept:'application/json' }, signal:AbortSignal.timeout(5000) })
@@ -113,7 +129,7 @@
           callback:() => {
             if (sending) return;
             online = true;
-            submit.innerHTML = 'Send request <span aria-hidden="true">→</span>';
+            submit.innerHTML = `${kind==='tour'?'Book tour':'Send request'} <span aria-hidden="true">→</span>`;
             delivery.textContent = 'Send your request securely to Nana’s team. We’ll follow up using the contact detail you provide.';
           },
           'error-callback':emailMode,

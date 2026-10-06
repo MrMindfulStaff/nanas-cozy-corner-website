@@ -1,17 +1,18 @@
 import { createHash } from 'node:crypto';
+import { brain,brainReady,notify } from '../lib/brain.js';
 
 const titles = { availability:'Childcare availability', tour:'Tour request', ehs:'Early Head Start question', contact:'Website inquiry', referral:'Referral question' };
 const labels = { parent_name:'Name', contact:'Reply by phone or email', child_age:'Child’s age', start_timing:'Start timing', schedule:'Days and hours needed', transportation:'Transportation', message:'Message', zip_code:'ZIP code', preferred_date:'Preferred tour date', preferred_time:'Preferred time of day', reason:'Question about', referrer_type:'Connection to Nana’s' };
 const fields = {
   availability:['parent_name','contact','child_age','start_timing','schedule','transportation','message'],
-  tour:['parent_name','contact','child_age','preferred_date','preferred_time','message'],
+  tour:['parent_name','contact','email','phone','child_age','slot_id','message'],
   ehs:['parent_name','contact','child_age','zip_code','message'],
   contact:['parent_name','contact','reason','message'],
   referral:['parent_name','contact','referrer_type','message']
 };
 const required = {
   availability:['parent_name','contact','child_age','start_timing','schedule'],
-  tour:['parent_name','contact','child_age'], ehs:['parent_name','contact','child_age'],
+  tour:['parent_name','contact','email','phone','child_age','slot_id'], ehs:['parent_name','contact','child_age'],
   contact:['parent_name','contact','reason','message'], referral:['parent_name','contact','referrer_type']
 };
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -52,6 +53,7 @@ export async function POST(request) {
     if (key !== 'message' && /[\r\n\x00]/.test(data[key])) return failure('Invalid field value.');
   }
   if (required[input.kind].some(key=>!data[key])) return failure('Please complete the required fields.');
+  if(input.kind==='tour' && (!emailPattern.test(data.email)||data.phone.replace(/\D/g,'').length<10)) return failure('Enter your email address and phone number.');
   const phoneDigits = data.contact.replace(/\D/g,'');
   if (!emailPattern.test(data.contact) && !(/^[+()\d\s.\-]+$/.test(data.contact) && phoneDigits.length >= 10 && phoneDigits.length <= 15)) return failure('Enter a valid phone number or email address.');
   if (data.zip_code && !/^\d{5}$/.test(data.zip_code)) return failure('Enter a five-digit ZIP code.');
@@ -71,6 +73,15 @@ export async function POST(request) {
     });
     const verification = await challenge.json();
     if (!challenge.ok || verification.success !== true || verification.action !== 'website_inquiry' || !c.hosts.includes(verification.hostname) || verification.hostname !== origin.hostname) return failure('Please complete a new security check.',403);
+    if(brainReady()) {
+      let saved;
+      try { saved=await brain('POST',{...data,kind:input.kind,request_id:input.request_id}); }
+      catch(error) { return failure(error.status===409?error.message:'We could not save your request. Please retry or contact the center.',error.status===409?409:503); }
+      let emailAccepted=false;
+      try { emailAccepted=await notify(saved.id); } catch { /* Saved record exposes pending email for staff retry. */ }
+      return reply({ok:true,id:saved.id,saved:true,booked:saved.booked,emailAccepted},202);
+    }
+    if(input.kind==='tour')return failure('Tour booking is temporarily unavailable. Please call the center.',503);
     const text = [titles[input.kind],'',...fields[input.kind].filter(key=>data[key]).map(key=>`${labels[key]}: ${data[key]}`),'',input.kind==='tour'?'Status: Tour requested — staff confirmation required.':'Status: New website inquiry.',`Reference: ${input.request_id}`].join('\n');
     const idempotency = createHash('sha256').update(JSON.stringify({id:input.request_id,kind:input.kind,data})).digest('hex');
     const payload = {from:c.from,to:[c.to],subject:`[Nana’s website] ${titles[input.kind]}`,text};
