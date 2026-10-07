@@ -2,10 +2,15 @@
   "name": "nanas-cozy-corner-website",
   "private": true,
   "type": "module",
-  "engines": { "node": "24.x" },
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "build": "node scripts/build.mjs",
     "test": "node --test tests/*.test.mjs",
     "dev": "node scripts/dev.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
   }
 }

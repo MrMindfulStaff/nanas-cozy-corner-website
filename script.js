@@ -20,6 +20,16 @@
     detail: { name, kind, page: window.location.pathname }
   }));
   document.querySelectorAll('a[href^="tel:"]').forEach(link => link.addEventListener('click', () => track('call_click', 'phone')));
+  // Keep phone actions clear of the keyboard while a parent fills out a form.
+  const isField = element => element?.matches('input,select,textarea');
+  document.addEventListener('focusin', event => {
+    if (isField(event.target)) document.body.classList.add('editing-form');
+  });
+  document.addEventListener('focusout', () => {
+    requestAnimationFrame(() => {
+      if (!isField(document.activeElement)) document.body.classList.remove('editing-form');
+    });
+  });
   const form = document.querySelector('form[data-inquiry]');
   if (!form) return;
   const panel = form.closest('.form-card');
@@ -125,7 +135,7 @@
       if (!config?.ready || !config.siteKey) return;
       window.nanaTurnstileReady = () => {
         widgetId = window.turnstile.render(form.querySelector('[data-challenge]'), {
-          sitekey:config.siteKey, action:'website_inquiry', theme:'light',
+          sitekey:config.siteKey, action:'website_inquiry', theme:'light', size:'compact',
           callback:() => {
             if (sending) return;
             online = true;
