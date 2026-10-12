@@ -12,5 +12,8 @@
   },
   "devDependencies": {
     "sharp": "^0.35.5"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
   }
 }
