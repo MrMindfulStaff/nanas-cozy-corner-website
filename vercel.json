@@ -6,7 +6,8 @@
   "cleanUrls": false,
   "redirects": [
     { "source": "/:path*", "has": [{ "type": "host", "value": "nanascozycorner.com" }], "destination": "https://www.nanascozycorner.com/:path*", "permanent": true },
-    { "source": "/index.html", "destination": "/", "permanent": true }
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/refer", "destination": "/referral-program.html#inquiry", "permanent": false }
   ],
   "headers": [
     { "source": "/(.*)", "headers": [
