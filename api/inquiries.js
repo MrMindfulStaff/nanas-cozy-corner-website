@@ -1,19 +1,19 @@
 import { createHash } from 'node:crypto';
 import { brain,brainReady,notify } from '../lib/brain.js';
 
-const titles = { availability:'Childcare availability', tour:'Tour request', ehs:'Early Head Start question', contact:'Website inquiry', referral:'Referral question' };
-const labels = { parent_name:'Name', contact:'Reply by phone or email', child_age:'Child’s age', start_timing:'Start timing', schedule:'Days and hours needed', transportation:'Transportation', message:'Message', zip_code:'ZIP code', preferred_date:'Preferred tour date', preferred_time:'Preferred time of day', reason:'Question about', referrer_type:'Connection to Nana’s' };
+const titles = { availability:'Childcare availability', tour:'Tour request', ehs:'Early Head Start question', contact:'Website inquiry', referral:'Family referral' };
+const labels = { parent_name:'Name', contact:'Reply by phone or email', child_age:'Child’s age', start_timing:'Start timing', schedule:'Days and hours needed', transportation:'Transportation', message:'Message', zip_code:'ZIP code', preferred_date:'Preferred tour date', preferred_time:'Preferred time of day', reason:'Question about', referrer_type:'Connection to Nana’s', family_name:'Referred family', family_contact:'Family’s phone or email', child_age_group:'Child’s age group', care_type:'Care wanted', family_consent:'Family agreed to be contacted' };
 const fields = {
   availability:['parent_name','contact','child_age','start_timing','schedule','transportation','message'],
   tour:['parent_name','contact','email','phone','child_age','slot_id','message'],
   ehs:['parent_name','contact','child_age','zip_code','message'],
   contact:['parent_name','contact','reason','message'],
-  referral:['parent_name','contact','referrer_type','message']
+  referral:['parent_name','contact','family_name','family_contact','child_age_group','care_type','family_consent','message']
 };
 const required = {
   availability:['parent_name','contact','child_age','start_timing','schedule'],
   tour:['parent_name','contact','email','phone','child_age','slot_id'], ehs:['parent_name','contact','child_age'],
-  contact:['parent_name','contact','reason','message'], referral:['parent_name','contact','referrer_type']
+  contact:['parent_name','contact','reason','message'], referral:['parent_name','contact','family_name','family_contact','child_age_group','family_consent']
 };
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const configuration = () => ({
@@ -56,6 +56,12 @@ export async function POST(request) {
   if(input.kind==='tour' && (!emailPattern.test(data.email)||data.phone.replace(/\D/g,'').length<10)) return failure('Enter your email address and phone number.');
   const phoneDigits = data.contact.replace(/\D/g,'');
   if (!emailPattern.test(data.contact) && !(/^[+()\d\s.\-]+$/.test(data.contact) && phoneDigits.length >= 10 && phoneDigits.length <= 15)) return failure('Enter a valid phone number or email address.');
+  if (input.kind==='referral') {
+    const familyDigits = data.family_contact.replace(/\D/g,'');
+    if (!emailPattern.test(data.family_contact) && !(/^[+()\d\s.\-]+$/.test(data.family_contact) && familyDigits.length >= 10 && familyDigits.length <= 15)) return failure('Enter a valid phone number or email address for the family.');
+    if (data.family_consent !== 'Yes') return failure('Please confirm the family agreed to be contacted.');
+    if (!['6 weeks – 12 months','1 – 3 years','School-age'].includes(data.child_age_group)) return failure('Choose the child’s age group.');
+  }
   if (data.zip_code && !/^\d{5}$/.test(data.zip_code)) return failure('Enter a five-digit ZIP code.');
   if (data.preferred_date) {
     const parts = new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());

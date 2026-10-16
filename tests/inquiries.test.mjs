@@ -73,3 +73,15 @@ test('saved tour survives email failure and reports it honestly',async()=>withEn
   throw Error('mail service unavailable');
  },async()=>{const result=await (await POST(request(tour))).json();assert.equal(result.booked,true);assert.equal(result.saved,true);assert.equal(result.emailAccepted,false);});
 }));
+test('referrals need the family contact, an age group and the family consent before any provider call',async()=>withEnvironment(configured,async()=>{
+  const referral={kind:'referral',parent_name:'Referrer QA',contact:'4145550100',family_name:'Family QA',family_contact:'family@example.com',child_age_group:'1 – 3 years',care_type:'Full-time',family_consent:'Yes',request_id:'550e8400-e29b-41d4-a716-446655440001',turnstile_token:'test-token'};
+  await fakeFetch(()=>{throw new Error('Provider should not be called');},async()=>{
+    for(const change of [{family_contact:''},{family_contact:'nope'},{family_consent:''},{family_consent:'on'},{child_age_group:'Teen'},{family_name:''}]) {
+      assert.equal((await POST(request({...referral,...change}))).status,400);
+    }
+  });
+  let sent;await fakeFetch(async(url,init)=>{if(String(url).includes('turnstile'))return verified();sent=JSON.parse(init.body);return Response.json({id:'email-1'});},async()=>{
+    assert.equal((await POST(request(referral))).status,202);
+  });
+  assert.match(sent.text,/Referred family: Family QA/);assert.match(sent.text,/Family agreed to be contacted: Yes/);assert.match(sent.subject,/Family referral/);
+}));

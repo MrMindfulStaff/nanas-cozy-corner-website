@@ -40,8 +40,8 @@
   const draftText = draft.querySelector('[data-draft]');
   const mailLink = draft.querySelector('[data-email-link]');
   const kind = form.dataset.inquiry;
-  const titles = { availability:'Childcare availability', tour:'Tour request', ehs:'Early Head Start question', contact:'Website inquiry', referral:'Referral question' };
-  const labels = { parent_name:'Name', email:'Email', phone:'Phone', slot_id:'Tour time reference', contact:'Reply by phone or email', child_age:'Child’s age', start_timing:'Start timing', schedule:'Days and hours needed', transportation:'Transportation', message:'Message', zip_code:'ZIP code', preferred_date:'Preferred tour date', preferred_time:'Preferred time of day', reason:'Question about', referrer_type:'Connection to Nana’s' };
+  const titles = { availability:'Childcare availability', tour:'Tour request', ehs:'Early Head Start question', contact:'Website inquiry', referral:'Family referral' };
+  const labels = { parent_name:'Name', email:'Email', phone:'Phone', slot_id:'Tour time reference', contact:'Reply by phone or email', child_age:'Child’s age', start_timing:'Start timing', schedule:'Days and hours needed', transportation:'Transportation', message:'Message', zip_code:'ZIP code', preferred_date:'Preferred tour date', preferred_time:'Preferred time of day', reason:'Question about', referrer_type:'Connection to Nana’s', family_name:'Referred family', family_contact:'Family’s phone or email', child_age_group:'Child’s age group', care_type:'Care wanted', family_consent:'Family agreed to be contacted' };
   let online = false, widgetId = null, sending = false, started = false;
   let requestId = crypto.randomUUID();
   const contact = form.elements.namedItem('contact');
