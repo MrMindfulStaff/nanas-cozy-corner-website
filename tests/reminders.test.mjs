@@ -1,0 +1,25 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {POST} from '../api/tour-reminders.js';
+const env={WEBSITE_INTAKE_SECRET:'a'.repeat(64),RESEND_API_KEY:'test',INQUIRY_FROM:'forms@example.com',INQUIRY_TO:'kelly@example.com'};
+const lead={id:'c1234567890',name:'QA',email:'parent@example.com',slot:{state:'BOOKED',startsAt:'2026-10-27T15:00:00Z',endsAt:'2026-10-27T15:30:00Z'}};
+const call=body=>POST(new Request('https://example.com/api/tour-reminders',{method:'POST',headers:{Authorization:'Bearer '+env.WEBSITE_INTAKE_SECRET},body:JSON.stringify(body)}));
+async function withFetch(current,fn){const prior=globalThis.fetch;const previous={...process.env};Object.assign(process.env,env);const sent=[];globalThis.fetch=async(url,options)=>{if(url.includes('resend.com')){sent.push({body:JSON.parse(options.body),key:options.headers['Idempotency-Key']});return Response.json({id:'receipt'});}return Response.json({lead:current});};try{await fn(sent);}finally{globalThis.fetch=prior;for(const k of Object.keys(env)){if(previous[k]===undefined)delete process.env[k];else process.env[k]=previous[k];}}}
+test('day-before and morning reminders go to the parent with stable, distinct keys',()=>withFetch(lead,async sent=>{
+ assert.equal((await call({id:lead.id,kind:'day_before',startsAt:lead.slot.startsAt})).status,200);
+ assert.equal((await call({id:lead.id,kind:'morning',startsAt:lead.slot.startsAt})).status,200);
+ assert.deepEqual(sent.map(s=>s.body.to),[['parent@example.com'],['parent@example.com']]);
+ assert.match(sent[0].body.subject,/tomorrow at 10:00 AM/);assert.match(sent[0].body.text,/Tuesday, October 27, at 10:00 AM/);
+ assert.match(sent[1].body.subject,/today at 10:00 AM/);assert.match(sent[1].body.text,/4006 N 42nd Street/);
+ assert.notEqual(sent[0].key,sent[1].key);
+}));
+test('no reminder when the tour was moved or cancelled',()=>withFetch({...lead,slot:{...lead.slot,state:'CANCELLED'}},async sent=>{
+ assert.equal((await call({id:lead.id,kind:'morning',startsAt:lead.slot.startsAt})).status,409);
+ assert.equal((await call({id:lead.id,kind:'morning',startsAt:'2026-10-28T15:00:00Z'})).status,409);
+ assert.equal(sent.length,0);
+}));
+test('reminder endpoint refuses a wrong secret and an unknown kind',async()=>{
+ const old=process.env.WEBSITE_INTAKE_SECRET;process.env.WEBSITE_INTAKE_SECRET='a'.repeat(64);
+ try{assert.equal((await POST(new Request('https://example.com',{method:'POST',headers:{Authorization:'Bearer wrong'},body:'{}'}))).status,401);assert.equal((await call({id:lead.id,kind:'weekly',startsAt:lead.slot.startsAt})).status,400);}
+ finally{if(old===undefined)delete process.env.WEBSITE_INTAKE_SECRET;else process.env.WEBSITE_INTAKE_SECRET=old;}
+});
