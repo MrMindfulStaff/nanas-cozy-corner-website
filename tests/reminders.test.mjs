@@ -23,3 +23,12 @@ test('reminder endpoint refuses a wrong secret and an unknown kind',async()=>{
  try{assert.equal((await POST(new Request('https://example.com',{method:'POST',headers:{Authorization:'Bearer wrong'},body:'{}'}))).status,401);assert.equal((await call({id:lead.id,kind:'weekly',startsAt:lead.slot.startsAt})).status,400);}
  finally{if(old===undefined)delete process.env.WEBSITE_INTAKE_SECRET;else process.env.WEBSITE_INTAKE_SECRET=old;}
 });
+test('follow-up email: same tour button, follow-up wording, refused once a tour is booked',async()=>{
+ const {POST:followUp}=await import('../api/lead-followup.js');
+ const req=id=>followUp(new Request('https://example.com/api/lead-followup',{method:'POST',headers:{Authorization:'Bearer '+env.WEBSITE_INTAKE_SECRET},body:JSON.stringify({id})}));
+ await withFetch({...lead,kind:'facebook_ad',name:'Jordan Smith',slot:null},async sent=>{
+  assert.equal((await req(lead.id)).status,200);
+  assert.match(sent[0].body.subject,/Still looking for childcare/);assert.match(sent[0].body.html,/Choose my tour time/);assert.match(sent[0].body.html,/\?ref=c1234567890#inquiry/);assert.doesNotMatch(sent[0].body.text,/We received your request/);assert.match(sent[0].key,/^nana-c1234567890-followup-\d{4}-\d{2}-\d{2}$/);
+ });
+ await withFetch(lead,async sent=>{assert.equal((await req(lead.id)).status,409);assert.equal(sent.length,0);});
+});
