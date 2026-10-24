@@ -44,6 +44,8 @@
   const labels = { parent_name:'Name', email:'Email', phone:'Phone', slot_id:'Tour time reference', contact:'Reply by phone or email', child_age:'Child’s age', start_timing:'Start timing', schedule:'Days and hours needed', transportation:'Transportation', message:'Message', zip_code:'ZIP code', preferred_date:'Preferred tour date', preferred_time:'Preferred time of day', reason:'Question about', referrer_type:'Connection to Nana’s', family_name:'Referred family', family_contact:'Family’s phone or email', child_age_group:'Child’s age group', care_type:'Care wanted', family_consent:'Family agreed to be contacted' };
   let online = false, widgetId = null, sending = false, started = false;
   let requestId = crypto.randomUUID();
+  // Arrived from the welcome email's button: book the tour onto that existing lead.
+  const tourRef = (new URLSearchParams(location.search).get('ref') || '').match(/^[a-z0-9]{10,100}$/i)?.[0] || '';
   const contact = form.elements.namedItem('contact');
   const setStatus = (message, state = '') => { status.textContent = message; status.className = `form-status ${state}`; };
   const emailMode = () => {
@@ -90,7 +92,7 @@
     submit.disabled = true;
     setStatus('Sending your request…');
     try {
-      const response = await fetch('/api/inquiries', { method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify({ ...data, request_id:requestId, turnstile_token:token }), signal:AbortSignal.timeout(60000) });
+      const response = await fetch('/api/inquiries', { method:'POST', headers:{ 'Content-Type':'application/json' }, body:JSON.stringify({ ...data, request_id:requestId, turnstile_token:token, ...(kind==='tour'&&tourRef?{ref:tourRef}:{}) }), signal:AbortSignal.timeout(60000) });
       const result = await response.json();
       if(response.status===409){setStatus(result.message || 'That time is no longer available. Choose another time.','error');await loadSlots();window.turnstile?.reset(widgetId);submit.disabled=false;return;}
       if (!response.ok || result.ok !== true || !result.id) throw new Error('DELIVERY_NOT_CONFIRMED');

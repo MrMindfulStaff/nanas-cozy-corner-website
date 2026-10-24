@@ -81,7 +81,9 @@ export async function POST(request) {
     if (!challenge.ok || verification.success !== true || verification.action !== 'website_inquiry' || !c.hosts.includes(verification.hostname) || verification.hostname !== origin.hostname) return failure('Please complete a new security check.',403);
     if(brainReady()) {
       let saved;
-      try { saved=await brain('POST',{...data,kind:input.kind,request_id:input.request_id}); }
+      // ref: the lead id from the welcome email's button, so the tour books onto that lead.
+      const ref=input.kind==='tour'&&typeof input.ref==='string'&&/^[a-z0-9]{10,100}$/i.test(input.ref)?input.ref:undefined;
+      try { saved=await brain('POST',{...data,kind:input.kind,request_id:input.request_id,...(ref?{ref}:{})}); }
       catch(error) { return failure(error.status===409?error.message:'We could not save your request. Please retry or contact the center.',error.status===409?409:503); }
       let emailAccepted=false;
       try { emailAccepted=await notify(saved.id); } catch { /* Saved record exposes pending email for staff retry. */ }
