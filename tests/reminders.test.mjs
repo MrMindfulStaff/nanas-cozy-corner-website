@@ -32,3 +32,18 @@ test('follow-up email: same tour button, follow-up wording, refused once a tour 
  });
  await withFetch(lead,async sent=>{assert.equal((await req(lead.id)).status,409);assert.equal(sent.length,0);});
 });
+test('no-show email: missed time, reschedule button on the same lead, signed cancel link; cancelling needs a button press',async()=>{
+ const {POST:noShow}=await import('../api/lead-noshow.js');const cancel=await import('../api/lead-cancel.js');const {cancelSig}=await import('../lib/brain.js');
+ const req=id=>noShow(new Request('https://example.com/api/lead-noshow',{method:'POST',headers:{Authorization:'Bearer '+env.WEBSITE_INTAKE_SECRET},body:JSON.stringify({id})}));
+ await withFetch({...lead,status:'NO_SHOW',slot:{...lead.slot,state:'MISSED'}},async sent=>{
+  assert.equal((await req(lead.id)).status,200);
+  assert.match(sent[0].body.subject,/We missed you/);assert.match(sent[0].body.text,/missed your tour on Tuesday, October 27 at 10:00 AM/);
+  assert.match(sent[0].body.html,/Pick a new tour time/);assert.match(sent[0].body.html,/\?ref=c1234567890#inquiry/);
+  assert.ok(sent[0].body.html.includes(`/api/lead-cancel?id=c1234567890&sig=${cancelSig(lead.id)}`));
+  assert.match(sent[0].key,/^nana-c1234567890-noshow-\d+$/);
+  const page=await cancel.GET(new Request(`https://example.com/api/lead-cancel?id=${lead.id}&sig=${cancelSig(lead.id)}`));
+  assert.equal(page.status,200);assert.match(await page.text(),/method="post"/);
+  assert.equal((await cancel.GET(new Request(`https://example.com/api/lead-cancel?id=${lead.id}&sig=bad`))).status,400);
+ });
+ await withFetch(lead,async sent=>{assert.equal((await req(lead.id)).status,409);assert.equal(sent.length,0);});
+});
