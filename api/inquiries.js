@@ -4,10 +4,10 @@ import { brain,brainReady,notify } from '../lib/brain.js';
 const titles = { availability:'Childcare availability', tour:'Tour request', ehs:'Early Head Start question', contact:'Website inquiry', referral:'Family referral' };
 const labels = { parent_name:'Name', contact:'Reply by phone or email', child_age:'Child’s age', start_timing:'Start timing', schedule:'Days and hours needed', transportation:'Transportation', message:'Message', zip_code:'ZIP code', preferred_date:'Preferred tour date', preferred_time:'Preferred time of day', reason:'Question about', referrer_type:'Connection to Nana’s', family_name:'Referred family', family_contact:'Family’s phone or email', child_age_group:'Child’s age group', care_type:'Care wanted', family_consent:'Family agreed to be contacted' };
 const fields = {
-  availability:['parent_name','contact','child_age','start_timing','schedule','transportation','message'],
-  tour:['parent_name','contact','email','phone','child_age','slot_id','message'],
-  ehs:['parent_name','contact','child_age','zip_code','message'],
-  contact:['parent_name','contact','reason','message'],
+  availability:['parent_name','contact','child_age','start_timing','schedule','transportation','message','sms_consent'],
+  tour:['parent_name','contact','email','phone','child_age','slot_id','message','sms_consent'],
+  ehs:['parent_name','contact','child_age','zip_code','message','sms_consent'],
+  contact:['parent_name','contact','reason','message','sms_consent'],
   referral:['parent_name','contact','family_name','family_contact','child_age_group','care_type','family_consent','message']
 };
 const required = {
@@ -62,6 +62,7 @@ export async function POST(request) {
     if (data.family_consent !== 'Yes') return failure('Please confirm the family agreed to be contacted.');
     if (!['6 weeks – 12 months','1 – 3 years','School-age'].includes(data.child_age_group)) return failure('Choose the child’s age group.');
   }
+  if (data.sms_consent && data.sms_consent !== 'Yes') return failure('Invalid form data.');
   if (data.zip_code && !/^\d{5}$/.test(data.zip_code)) return failure('Enter a five-digit ZIP code.');
   if (data.preferred_date) {
     const parts = new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
